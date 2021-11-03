@@ -79,6 +79,7 @@ public class JFramePrincipal extends JFrame {
 	private void pantallaPrincipalResized(int width ,int height) {
 		jPanelSalasYChats.setSize((int)jPanelSalasYChats.getSize().getWidth(), height);
 		jpanelMessages.setSize(width-(int)jPanelSalasYChats.getSize().getWidth(), height);
+		//TODO
 	}
 
 	/**

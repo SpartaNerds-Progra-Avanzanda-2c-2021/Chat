@@ -38,7 +38,7 @@ public class JPanelSalasYChats extends JPanel{
 		jPanelSalasYChatTitulo.setBounds(0,0,Constantes.salaWidth,Constantes.salaHeight);
 		jPanelSalasYChatTitulo.setBackground(Constantes.salaHoverColor);
 		jPanelSalasYChatTitulo.setLayout(null);
-		jPanelSalasYChatTitulo.setBackground(Constantes.jPanelMessagesColor);
+		jPanelSalasYChatTitulo.setBackground(Constantes.jPanelSalasYChatTituloColor);
 		this.add(jPanelSalasYChatTitulo);
 	}
 
@@ -54,6 +54,9 @@ public class JPanelSalasYChats extends JPanel{
 		    }
 		    public void mouseEntered(MouseEvent e) {
 		        e.getComponent().setBackground(Constantes.salaHoverColor);
+		    }
+		    public void mouseClicked(MouseEvent e) {
+		    	e.getComponent().setBackground(new Color(0,0,0)); // crear evento que pinte el "lienzo" para los mensajes
 		    }
 		});
 		
