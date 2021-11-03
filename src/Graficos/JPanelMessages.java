@@ -30,11 +30,12 @@ public class JPanelMessages extends JPanel{
 	public JPanelMessages() {
 		super();
 		addChatBox();
+		//addMensajesVisibles() o algo que muestre los mensajes
 	}
 
 	private void addChatBox() {
 		jPanelChatBox = new JPanelChatBox();
-		jPanelChatBox.setBounds(0,Constantes.chatMinHeight*2/3,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);
+		jPanelChatBox.setBounds(0,Constantes.chatMinHeight*3/5,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);
 		jPanelChatBox.setBackground(Constantes.jPanelChatBoxColor);
 		this.add(jPanelChatBox);
 	}

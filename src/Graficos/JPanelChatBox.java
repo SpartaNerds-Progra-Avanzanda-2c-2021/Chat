@@ -20,57 +20,28 @@ import Utils.Peticion;
 
 public class JPanelChatBox extends JPanel{
 
-    public static JTextArea jAreaTexto = new JTextArea();
-    public static JScrollPane jPanelDeslizable = new JScrollPane(jAreaTexto);
-    private JButton btnEnviarTexto;
-    private JButton btnDescargarTexto;
+    public static JTextArea jAreaTexto;
+    public static JScrollPane jPanelDeslizable;
+    public static JPanel jAreaBotones;
     
 	
 	public JPanelChatBox() {
 		super();
 		addTextArea();
-		//Estos 2 deberian estar en su propio jPanel chikito al costado
-		addBotonEnviar();
-		addBotonDescargar();
+		addBotones();
 	}
 	
 	public void addTextArea() {
-		jPanelDeslizable.setPreferredSize(new Dimension((Constantes.chatMinWidth-Constantes.salaWidth)*7/10, Constantes.chatMinHeight*2/9));
+		jAreaTexto = new JTextArea();
+		jPanelDeslizable = new JScrollPane(jAreaTexto);
+		jPanelDeslizable.setPreferredSize(new Dimension((Constantes.chatMinWidth-Constantes.salaWidth)*6/10, Constantes.chatMinHeight*2/9));
         this.add(jPanelDeslizable);
 	}
 
-	public void addBotonEnviar() {
-		btnEnviarTexto = new JButton("Enviar");
-		btnEnviarTexto.setBounds(50, 50, 90, 20);
-
-		btnEnviarTexto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_SEND_ROOM_SMG,
-						jAreaTexto.getText());
-				try {
-					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		this.add(btnEnviarTexto);
+	public void addBotones() {
+		jAreaBotones = new JPanelAreaBtn();
+		jAreaBotones.setBounds(0,0, (Constantes.chatMinWidth-Constantes.salaWidth)*4/10, Constantes.chatMinHeight*2/9 );
+		this.add(jAreaBotones);
 	}
-	public void addBotonDescargar() {
-		btnDescargarTexto = new JButton("Descargar");
-		btnDescargarTexto.setBounds(50, 50, 90, 20);
-
-		btnDescargarTexto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_DOWNLOAD_ROOM_TEXT,
-						null);
-				try {
-					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		this.add(btnDescargarTexto);
-	}
+	
 }
