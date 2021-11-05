@@ -24,4 +24,10 @@ public class Mensaje implements Serializable{
 	public String getInfo() {
 		return info;
 	}
+
+	@Override
+	public String toString() {
+		return propietario + "Se envio a las: " + createdAt + " " + info + "]\n";
+	}
+	
 }

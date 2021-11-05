@@ -29,7 +29,7 @@ import javax.swing.JTable;
 public class JFramePrincipal extends JFrame {
 	public JTable tblClientes;
 	public JPanelSalasYChats jPanelSalasYChats;
-	public JPanelComunication jPanelComunication;
+	public static JPanelComunication jPanelComunication;
 
 	/**
 	 * Create the frame.
