@@ -1,6 +1,5 @@
 package Graficos;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -30,7 +29,7 @@ import javax.swing.JTable;
 public class JFramePrincipal extends JFrame {
 	public JTable tblClientes;
 	public JPanelSalasYChats jPanelSalasYChats;
-	public JPanelComunication jpanelMessages;
+	public JPanelComunication jPanelComunication;
 
 	/**
 	 * Create the frame.
@@ -44,11 +43,11 @@ public class JFramePrincipal extends JFrame {
 	}
 
 	private void addJPanelChat() {
-		jpanelMessages = new JPanelComunication();
-		jpanelMessages.setBounds(Constantes.salaWidth, 0, Constantes.chatMinWidth-Constantes.salaWidth, this.getHeight());
-		jpanelMessages.setLayout(null);
-		jpanelMessages.setBackground(Constantes.jPanelMessagesColor);
-		getContentPane().add(jpanelMessages);
+		jPanelComunication = new JPanelComunication();
+		jPanelComunication.setBounds(Constantes.salaWidth, 0, Constantes.chatMinWidth-Constantes.salaWidth, this.getHeight());
+		jPanelComunication.setLayout(null);
+		jPanelComunication.setBackground(Constantes.jPanelMessagesColor);
+		getContentPane().add(jPanelComunication);
 	}
 	
 	private void addJPanelSalas() {
@@ -78,7 +77,7 @@ public class JFramePrincipal extends JFrame {
 	
 	private void pantallaPrincipalResized(int width ,int height) {
 		jPanelSalasYChats.setSize((int)jPanelSalasYChats.getSize().getWidth(), height);
-		jpanelMessages.setSize(width-(int)jPanelSalasYChats.getSize().getWidth(), height);
+		jPanelComunication.setSize(width-(int)jPanelSalasYChats.getSize().getWidth(), height);
 		//TODO
 	}
 

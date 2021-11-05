@@ -31,6 +31,7 @@ public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<St
 		Conexion nuevaConex = new Conexion(nuevoUser, new Date());
 		salaBuscada.addConexion(nuevaConex);
 
+		//deberia enviarselo solamente a los clientes dentro de la sala
 		for (Socket cliente : clientes) {
 			Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_ENTERS_ROOM, salaBuscada);
 			new ObjectOutputStream(cliente.getOutputStream()).writeObject(serverMessage);

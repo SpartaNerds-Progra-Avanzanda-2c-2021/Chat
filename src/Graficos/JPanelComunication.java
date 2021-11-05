@@ -1,6 +1,6 @@
 package Graficos;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -26,7 +26,7 @@ import GraficosViejos.VentanaABMCliente;
 
 public class JPanelComunication extends JPanel{
 	private JPanelChatBox jPanelChatBox;
-	//private JPanelMensajeBox jPanelMensajeBox;
+	private JPanelMensajeBox jPanelMensajeBox;
 
 	public JPanelComunication() {
 		super();
@@ -41,10 +41,13 @@ public class JPanelComunication extends JPanel{
 		this.add(jPanelChatBox);
 	}
 	private void addMensajesBox() {
-//		jPanelMensajeBox = new JPanelMensajeBox();
-//		jPanelMensajeBox.setBounds(0,Constantes.chatMinHeight,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);
-//		jPanelMensajeBox.setBackground(Constantes.jPanelChatBoxColor);
+		jPanelMensajeBox = new JPanelMensajeBox();
+		jPanelMensajeBox.setBounds(0,0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);
+		jPanelMensajeBox.setBackground(new Color(0,0,0));
 		this.add(jPanelChatBox);
 	}
-
+	
+	public void addPanelMensaje(int id, long date, String contenido){
+		jPanelMensajeBox.addPanelMensaje(id, date, contenido);
+	}
 }

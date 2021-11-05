@@ -9,5 +9,7 @@ public class ManejadorDeMensajeDeUsuarioEnSalaDelCliente extends ManejadorDelCli
 	@Override
 	public void manejar(Peticion<Mensaje> peticion, JFramePrincipal jFramePrincipal) throws Exception {
 		System.out.println(peticion.getData().getInfo()+"\n");
+		
+		jFramePrincipal.jPanelComunication.addPanelMensaje(peticion.getData().getPropietario(), peticion.getData().getCreatedAt(), peticion.getData().getInfo());
 	}
 }

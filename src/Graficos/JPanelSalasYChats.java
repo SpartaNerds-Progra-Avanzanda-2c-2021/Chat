@@ -1,6 +1,6 @@
 package Graficos;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;

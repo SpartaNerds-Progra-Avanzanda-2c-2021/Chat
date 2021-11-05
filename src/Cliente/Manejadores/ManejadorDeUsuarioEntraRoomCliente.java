@@ -22,21 +22,17 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 		
 		for (JPanelSala panelSala : panelSalas) { 
 			if (sala.getNombre().equals(panelSala.getNombre())) {
-				panelSala.setBackground(new Color(0,0,0));
 				panelSala.actualizarCantConexiones(sala.getConexiones().size());
 				panelSala.updateJLabel();
 				
 			}
 		}
 		
-		//jFramePrincipal.jPanelSalasYChats.addJPanelSala(sala.getNombre(), sala.getConexiones().size(), 0); 
-		//ERROR - necesito modificar el Panel existente
-		
 		ArrayList<Mensaje> msj = sala.getMensajes();
 		
 		for (Mensaje mensaje : msj) {
 			//pintar todos los mensajes
-			//jFramePrincipal.jPanelSalasYChats.addJPanelMensaje(mensaje, 0, 0);			
+			jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje.getPropietario(), mensaje.getCreatedAt(), mensaje.getInfo());			
 		}
 	}
 }
