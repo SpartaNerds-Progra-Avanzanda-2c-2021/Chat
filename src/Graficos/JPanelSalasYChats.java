@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -22,7 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import Cliente.Cliente;
 import GraficosViejos.VentanaABMCliente;
+import Utils.Acciones;
+import Utils.Peticion;
 
 public class JPanelSalasYChats extends JPanel{
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
@@ -31,6 +36,10 @@ public class JPanelSalasYChats extends JPanel{
 	public JPanelSalasYChats() {
 		super();
 		addTituloAndAddButton();
+	}
+	
+	public ArrayList<JPanelSala> getSalas(){
+		return this.salas;
 	}
 	
 	private void addTituloAndAddButton() {
@@ -43,21 +52,29 @@ public class JPanelSalasYChats extends JPanel{
 	}
 
 	public void addJPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos ) {
-		JPanelSala panel = new JPanelSala(nombre,cantConexiones,cantMensajesNuevos);
+		JPanelSala panel = new JPanelSala(nombre, cantConexiones, cantMensajesNuevos);
 		panel.setLayout(null);
-		panel.setBounds(0, Constantes.salaHeight*(salas.size()+1), Constantes.salaWidth, Constantes.salaHeight);
+		panel.setBounds(0, Constantes.salaHeight * (salas.size() + 1), Constantes.salaWidth, Constantes.salaHeight);
 		panel.setBackground(Constantes.jPanelSalasYChatsColor);
-		
+
 		panel.addMouseListener(new MouseAdapter() {
-		    public void mouseExited(MouseEvent e) {
-		        e.getComponent().setBackground(Constantes.jPanelSalasYChatsColor);
-		    }
-		    public void mouseEntered(MouseEvent e) {
-		        e.getComponent().setBackground(Constantes.salaHoverColor);
-		    }
-		    public void mouseClicked(MouseEvent e) {
-		    	e.getComponent().setBackground(new Color(0,0,0)); // crear evento que pinte el "lienzo" para los mensajes
-		    }
+			public void mouseExited(MouseEvent e) {
+				e.getComponent().setBackground(Constantes.jPanelSalasYChatsColor);
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				e.getComponent().setBackground(Constantes.salaHoverColor);
+			}
+
+			public void mouseClicked(MouseEvent e) {
+				// refinar y limitar
+				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_ENTERS_ROOM, nombre);
+				try {
+					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
 		});
 		
 		salas.add(panel);

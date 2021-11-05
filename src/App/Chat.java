@@ -1,6 +1,8 @@
 package App;
 
-public class Chat {
+import java.io.Serializable;
+
+public class Chat implements Serializable{
 	Usuario usuarios[];
 	Mensaje mensajes[];
 }

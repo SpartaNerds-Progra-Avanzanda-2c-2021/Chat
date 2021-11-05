@@ -24,13 +24,13 @@ import javax.swing.border.EmptyBorder;
 
 import GraficosViejos.VentanaABMCliente;
 
-public class JPanelMessages extends JPanel{
+public class JPanelMensajesYChatBox extends JPanel{
 	private JPanelChatBox jPanelChatBox;
 
-	public JPanelMessages() {
+	public JPanelMensajesYChatBox() {
 		super();
 		addChatBox();
-		//addMensajesVisibles() o algo que muestre los mensajes
+		addMensajesBox();
 	}
 
 	private void addChatBox() {
@@ -40,5 +40,7 @@ public class JPanelMessages extends JPanel{
 		this.add(jPanelChatBox);
 	}
 
-
+	private void addMensajesBox() {
+		//jPanelMensajesBox = new JPanelMensajesBox();
+	}
 }

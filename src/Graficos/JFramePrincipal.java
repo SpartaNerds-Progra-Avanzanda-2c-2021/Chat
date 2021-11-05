@@ -30,7 +30,7 @@ import javax.swing.JTable;
 public class JFramePrincipal extends JFrame {
 	public JTable tblClientes;
 	public JPanelSalasYChats jPanelSalasYChats;
-	public JPanelMessages jpanelMessages;
+	public JPanelMensajesYChatBox jpanelMessages;
 
 	/**
 	 * Create the frame.
@@ -44,7 +44,7 @@ public class JFramePrincipal extends JFrame {
 	}
 
 	private void addJPanelChat() {
-		jpanelMessages = new JPanelMessages();
+		jpanelMessages = new JPanelMensajesYChatBox();
 		jpanelMessages.setBounds(Constantes.salaWidth, 0, Constantes.chatMinWidth-Constantes.salaWidth, this.getHeight());
 		jpanelMessages.setLayout(null);
 		jpanelMessages.setBackground(Constantes.jPanelMessagesColor);

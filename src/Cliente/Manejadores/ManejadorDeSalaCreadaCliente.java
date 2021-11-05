@@ -15,6 +15,6 @@ public class ManejadorDeSalaCreadaCliente extends ManejadorDelCliente<Sala> {
 			throws UnknownHostException, Exception {
 		Sala sala = peticion.getData();
 
-		jFramePrincipal.jPanelSalasYChats.addJPanelSala(sala.getNombre(), 0, 0);
+		jFramePrincipal.jPanelSalasYChats.addJPanelSala(sala.getNombre(), sala.getConexiones().size(), 0);
 	}
 }
