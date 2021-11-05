@@ -3,11 +3,13 @@ package App;
 import java.io.Serializable;
 
 public class Usuario implements Serializable{
-	private String nombre;
-	private static int id = 0;
+	private int id;
 	
-	public Usuario() {
-		this.nombre =  String.valueOf(id);
-		id++;
+	public Usuario(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 }

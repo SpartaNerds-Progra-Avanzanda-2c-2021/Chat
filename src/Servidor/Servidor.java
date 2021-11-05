@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import App.Lobby;
 
 public class Servidor {
-	private ArrayList<Socket> clientes;
+	private ArrayList<ServerClient> clientes;
 	public static Lobby lobby = new Lobby();
 	
 	public Servidor(int puerto) {
 		int i=0;
-		clientes = new ArrayList<Socket>();
+		clientes = new ArrayList<ServerClient>();
 		
 		try {
 			ServerSocket server = new ServerSocket(puerto);
 			System.out.println("Servidor en linea...");
 			while (i < Constantes.clientesSoportados) {
-				Socket cliente = server.accept();
+				ServerClient cliente = new ServerClient(server.accept());
 				clientes.add(cliente);
 				new HiloEnrrutadorDeServidor(cliente, clientes, lobby).start();
 				i++;

@@ -13,6 +13,7 @@ import Utils.Peticion;
 
 public class Cliente {
 	public static Socket cliente;
+	public static Number clienteId;
 	public static JFramePrincipal jFramePrincipal;
 	
 	public Cliente(int puerto, String ip) {

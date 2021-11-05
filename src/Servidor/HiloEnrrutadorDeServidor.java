@@ -12,11 +12,11 @@ import Utils.Acciones;
 import Utils.Peticion;
 
 public class HiloEnrrutadorDeServidor extends Thread{
-	private Socket cliente;
-	private ArrayList<Socket> clientes;
+	private ServerClient cliente;
+	private ArrayList<ServerClient> clientes;
 	public Lobby lobby;
 	
-	public HiloEnrrutadorDeServidor(Socket cliente, ArrayList<Socket> clientes, Lobby lobby) {
+	public HiloEnrrutadorDeServidor(ServerClient cliente, ArrayList<ServerClient> clientes, Lobby lobby) {
 		super();
 		this.cliente = cliente;
 		this.clientes = clientes;
@@ -26,10 +26,10 @@ public class HiloEnrrutadorDeServidor extends Thread{
 	public void run() {
 		Peticion<?> peticion;
 		try {
-			peticion = (Peticion<?>) new ObjectInputStream(cliente.getInputStream()).readObject();
+			peticion = (Peticion<?>) new ObjectInputStream(cliente.cliente.getInputStream()).readObject();
 			while (peticion.getTipo() != Acciones.USER_DISCONNECTED_FROM_SERVER) {
 				enrrutar(peticion);										
-				peticion = (Peticion<?>) new ObjectInputStream(cliente.getInputStream()).readObject();
+				peticion = (Peticion<?>) new ObjectInputStream(cliente.cliente.getInputStream()).readObject();
 			}
 			
 			System.out.println("El cliente se ha desconectado");

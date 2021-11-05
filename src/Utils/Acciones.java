@@ -10,4 +10,6 @@ public class Acciones {
 	public static int USER_DISCONNECTED_FROM_SERVER = 7;
 	public static int USER_CREATE_ROOM = 8;
 	public static int USER_DOWNLOAD_ROOM_TEXT = 9;
+	public static int USER_LEAVE_ROOM = 10;
+	public static int SEND_ID_TO_USER = 11;
 }

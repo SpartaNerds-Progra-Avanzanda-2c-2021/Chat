@@ -14,40 +14,45 @@ import Servidor.ServerClient;
 import Utils.Acciones;
 import Utils.Peticion;
 
-public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<String> {
+public class ManejadorDeUsuarioSaleRoomServidor extends ManejadorDelServidor<String> {
 
 	@Override
 	public void manejar(Peticion<String> peticion, ArrayList<ServerClient> clientes, ServerClient solicitante, Lobby lobby)
 			throws Exception {
 
-		Sala salaBuscada = new Sala(peticion.getData());
+		String nombreDeSalaDejada = peticion.getData();
 		ArrayList<Sala> salas = lobby.getSalas();
 
+		Sala salaDejada = null;
+		
 		for (Sala sala : salas) {
-			if (sala.getNombre().equals(salaBuscada.getNombre()))
-				salaBuscada = sala;
+			if (sala.getNombre().equals(nombreDeSalaDejada))
+				salaDejada = sala;
+		}
+		
+		if(salaDejada == null) {
+			return;
 		}
 
-		for (Conexion conexion: salaBuscada.getConexiones()) {
-			if (conexion.getUsuario().getId() == solicitante.id) {
-				return;
+		Conexion conexionBuscada = null;
+		
+		for (Conexion conexion: salaDejada.getConexiones()) {
+			if(conexion.getUsuario().getId() == solicitante.id) {
+				conexionBuscada = conexion;
 			}
 		}
 		
-		if(solicitante.getConexiones() >= 3) {
+		if(conexionBuscada == null) {
 			return;
 		}
-		
-		Usuario nuevoUser = new Usuario(solicitante.id); 
-		Conexion nuevaConex = new Conexion(nuevoUser, new Date());
-		salaBuscada.addConexion(nuevaConex);
 
-		solicitante.setConexiones(solicitante.getConexiones()+1);
+		solicitante.setConexiones(solicitante.getConexiones()-1);
+		salaDejada.removeConexion(conexionBuscada);	
 		
 		//deberia enviarselo solamente a los clientes dentro de la sala
 		for (ServerClient cliente : clientes) {
-			Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_ENTERS_ROOM, salaBuscada);
+			Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_LEAVE_ROOM, salaDejada);
 			new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessage);
-		}
+		}	
 	}
 }

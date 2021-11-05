@@ -11,4 +11,12 @@ public class Conexion implements Serializable {
 		this.usuario = user;
 		this.createdAt = date;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 }

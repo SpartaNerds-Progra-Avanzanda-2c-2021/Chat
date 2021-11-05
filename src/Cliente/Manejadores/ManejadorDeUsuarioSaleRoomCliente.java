@@ -12,7 +12,7 @@ import Graficos.JFramePrincipal;
 import Graficos.JPanelSala;
 import Utils.Peticion;
 
-public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala>{
+public class ManejadorDeUsuarioSaleRoomCliente extends ManejadorDelCliente<Sala>{
 
 	@Override
 	public void manejar(Peticion<Sala> peticion, JFramePrincipal jFramePrincipal)
@@ -22,31 +22,11 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 		//actualizar los conectados
 		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalasYChats.getSalas();
 		
-		JPanelSala panelSalaBuscada = null;
-		Sala salaBuscada = null;
-		
 		for (JPanelSala panelSala : panelSalas) { 
 			if (sala.getNombre().equals(panelSala.getNombre())) {
 				panelSala.actualizarCantConexiones(sala.getConexiones().size());
 				panelSala.updateJLabel();
-				panelSalaBuscada = panelSala;
-				salaBuscada = sala;
 			}
-		}
-		
-		if(panelSalaBuscada != null) {
-			for (Conexion conexion : salaBuscada.getConexiones()) {
-				if(conexion.getUsuario().getId() == (int)Cliente.clienteId) {
-					panelSalaBuscada.switchConection();
-				}
-			}
-		}
-		
-		ArrayList<Mensaje> msj = sala.getMensajes();
-		
-		for (Mensaje mensaje : msj) {
-			//pintar todos los mensajes
-			jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje.getPropietario(), mensaje.getCreatedAt(), mensaje.getInfo());			
 		}
 	}
 }

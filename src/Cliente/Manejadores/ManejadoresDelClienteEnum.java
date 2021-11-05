@@ -13,5 +13,7 @@ public class ManejadoresDelClienteEnum {
     	map.put(Acciones.USER_ENTERS_SERVER, new ManejadorDeNuevoUsuarioCliente());
     	map.put(Acciones.USER_CREATE_ROOM, new ManejadorDeSalaCreadaCliente());
     	map.put(Acciones.USER_ENTERS_ROOM, new ManejadorDeUsuarioEntraRoomCliente());
+    	map.put(Acciones.USER_LEAVE_ROOM, new ManejadorDeUsuarioSaleRoomCliente());
+    	map.put(Acciones.SEND_ID_TO_USER, new ManejadorDeUsuarioRecibeId());
     }
 }

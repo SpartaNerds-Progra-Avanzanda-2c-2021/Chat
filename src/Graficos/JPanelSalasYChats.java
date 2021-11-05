@@ -67,18 +67,16 @@ public class JPanelSalasYChats extends JPanel{
 			}
 
 			public void mouseClicked(MouseEvent e) {
-				// refinar y limitar
-				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_ENTERS_ROOM, nombre);
-				try {
-					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				showUsers();
 			}
 		});
 		
 		salas.add(panel);
 		this.add(panel);
 		this.updateUI();
+	}
+	
+	private void showUsers(){
+		
 	}
 }

@@ -1,19 +1,31 @@
 package Graficos;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import App.Mensaje;
+import Cliente.Cliente;
+import Utils.Acciones;
+import Utils.Peticion;
 
 public class JPanelSala extends JPanel{
 	private String nombre;
 	private int cantConexiones;
 	private int cantMensajesNuevos;
 	private JLabel cantConexionesLabel;
+	private JButton salirButton;
+	private boolean conectado = false;
 	
 	public JPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos) {
 		super();
@@ -24,6 +36,37 @@ public class JPanelSala extends JPanel{
 		addNombre();
 		addCantConexiones();
 		addCantMensajesNuevos();
+		addButtonDesconectar();
+	}
+	
+	private void addButtonDesconectar() {
+		salirButton = new JButton("Entrar");
+		salirButton.setBounds(Constantes.salaWidth / 2 +20 , Constantes.salaHeight / 2, 70, 20);
+		salirButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				leaveRoom();
+			}
+		});
+		this.add(salirButton);
+	}
+	
+	private void leaveRoom() {
+		if(!conectado) {
+			Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_ENTERS_ROOM, nombre);
+			try {
+				new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}else {
+			Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_LEAVE_ROOM,this.nombre);
+			try {
+				new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			switchConection();	
+		}
 	}
 	
 	private void addNombre() {
@@ -65,5 +108,11 @@ public class JPanelSala extends JPanel{
 
 	public void updateJLabel() {
 		this.cantConexionesLabel.updateUI();
+	}
+
+	public void switchConection() {
+		this.conectado = !this.conectado;
+		this.salirButton.setText(this.conectado?"Salir":"Entrar");
+		updateJLabel();
 	}
 }

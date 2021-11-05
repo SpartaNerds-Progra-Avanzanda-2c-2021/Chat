@@ -21,6 +21,10 @@ public class Sala implements Serializable {
 		this.conexiones.add(conex);
 	}
 	
+	public void removeConexion(Conexion conex) {
+		this.conexiones.remove(conex);
+	}
+	
 	public void addMensaje(Mensaje msj) {
 		this.mensajes.add(msj);
 	}
