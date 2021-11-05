@@ -13,6 +13,7 @@ public class JPanelSala extends JPanel{
 	private String nombre;
 	private int cantConexiones;
 	private int cantMensajesNuevos;
+	private JLabel cantConexionesLabel;
 	
 	public JPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos) {
 		super();
@@ -46,11 +47,23 @@ public class JPanelSala extends JPanel{
 	
 	private void addCantConexiones() {
 		String mensaje = "Conectados: "+String.valueOf(this.cantConexiones);
-		JLabel label=new JLabel(mensaje);  
-		label.setBorder(new EmptyBorder(0,25,0,0));
-		label.setFont(new Font("BOLD", Font.PLAIN, 10));
-		label.setBounds(0,Constantes.salaHeight/2,Constantes.salaWidth,Constantes.salaHeight/2);  
-	    this.add(label);
+		this.cantConexionesLabel = new JLabel(mensaje);  
+		cantConexionesLabel.setBorder(new EmptyBorder(0,25,0,0));
+		cantConexionesLabel.setFont(new Font("BOLD", Font.PLAIN, 10));
+		cantConexionesLabel.setBounds(0,Constantes.salaHeight/2,Constantes.salaWidth,Constantes.salaHeight/2);  
+	    this.add(cantConexionesLabel);
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void actualizarCantConexiones(int cantConexiones) {
+		this.cantConexiones = cantConexiones;
+		this.cantConexionesLabel.setText("Conectados: "+String.valueOf(this.cantConexiones));
+	}
+
+	public void updateJLabel() {
+		this.cantConexionesLabel.updateUI();
+	}
 }

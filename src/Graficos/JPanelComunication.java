@@ -40,7 +40,6 @@ public class JPanelComunication extends JPanel{
 		jPanelChatBox.setBackground(Constantes.jPanelChatBoxColor);
 		this.add(jPanelChatBox);
 	}
-	
 	private void addMensajesBox() {
 //		jPanelMensajeBox = new JPanelMensajeBox();
 //		jPanelMensajeBox.setBounds(0,Constantes.chatMinHeight,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);

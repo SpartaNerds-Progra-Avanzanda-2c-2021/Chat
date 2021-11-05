@@ -16,6 +16,10 @@ public class Sala implements Serializable{
 	    this.mensajes = new ArrayList<Mensaje>();
 	    this.chats = new ArrayList<Chat>();
 	}
+
+	public void addConexion(Conexion conex) {
+		this.conexiones.add(conex);
+	}
 	
 	public String getNombre() {
 		return nombre;
