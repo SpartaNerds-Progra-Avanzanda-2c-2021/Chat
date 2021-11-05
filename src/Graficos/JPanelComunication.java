@@ -22,11 +22,12 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import App.Mensaje;
 import GraficosViejos.VentanaABMCliente;
 
 public class JPanelComunication extends JPanel{
-	private JPanelChatBox jPanelChatBox;
-	private JPanelMensajeBox jPanelMensajeBox;
+	private static JPanelChatBox jPanelChatBox;
+	private static JPanelMensajeBox jPanelMensajeBox; //cambiar a NO static
 
 	public JPanelComunication() {
 		super();
@@ -40,14 +41,14 @@ public class JPanelComunication extends JPanel{
 		jPanelChatBox.setBackground(Constantes.jPanelChatBoxColor);
 		this.add(jPanelChatBox);
 	}
-	private void addMensajesBox() {
+	public void addMensajesBox() {
 		jPanelMensajeBox = new JPanelMensajeBox();
-		jPanelMensajeBox.setBounds(0,0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);
-		jPanelMensajeBox.setBackground(new Color(0,0,0));
-		this.add(jPanelChatBox);
+		jPanelMensajeBox.setBounds(0,0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight*3/5);
+		jPanelMensajeBox.setBackground(Constantes.jPanelMessagesColor);
+		this.add(jPanelMensajeBox);
 	}
 	
-	public void addPanelMensaje(int id, long date, String contenido){
-		jPanelMensajeBox.addPanelMensaje(id, date, contenido);
+	public static void addPanelMensaje(Mensaje info){
+		jPanelMensajeBox.addMensaje(info);
 	}
 }

@@ -28,16 +28,17 @@ public class JPanelAreaBtn extends JPanel {
 
 		btnEnviarTexto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mensaje msj = new Mensaje(0, 0L, JPanelChatBox.jAreaTexto.getText());
-				//Sala salaConMensaje = new Sala()
 				
-				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_SEND_ROOM_SMG,
-						JPanelChatBox.jAreaTexto.getText());
-				try {
-					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+				Mensaje msj = new Mensaje(0, 0L, JPanelChatBox.jAreaTexto.getText());
+				
+				JPanelComunication.addPanelMensaje(msj); // full sacar static
+//				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_SEND_ROOM_SMG,
+//						JPanelChatBox.jAreaTexto.getText());
+//				try {
+//					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
 			}
 		});
 		this.add(btnEnviarTexto);

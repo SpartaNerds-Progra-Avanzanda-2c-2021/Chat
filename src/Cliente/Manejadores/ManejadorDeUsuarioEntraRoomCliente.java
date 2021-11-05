@@ -32,7 +32,7 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 		
 		for (Mensaje mensaje : msj) {
 			//pintar todos los mensajes
-			jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje.getPropietario(), mensaje.getCreatedAt(), mensaje.getInfo());			
+			//jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje.getPropietario(), mensaje.getCreatedAt(), mensaje.getInfo());			
 		}
 	}
 }
