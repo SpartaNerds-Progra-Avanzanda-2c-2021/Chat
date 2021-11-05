@@ -24,13 +24,14 @@ import javax.swing.border.EmptyBorder;
 
 import GraficosViejos.VentanaABMCliente;
 
-public class JPanelMessages extends JPanel{
+public class JPanelComunication extends JPanel{
 	private JPanelChatBox jPanelChatBox;
+	//private JPanelMensajeBox jPanelMensajeBox;
 
-	public JPanelMessages() {
+	public JPanelComunication() {
 		super();
 		addChatBox();
-		//addMensajesVisibles() o algo que muestre los mensajes
+		addMensajesBox();
 	}
 
 	private void addChatBox() {
@@ -39,6 +40,12 @@ public class JPanelMessages extends JPanel{
 		jPanelChatBox.setBackground(Constantes.jPanelChatBoxColor);
 		this.add(jPanelChatBox);
 	}
-
+	
+	private void addMensajesBox() {
+//		jPanelMensajeBox = new JPanelMensajeBox();
+//		jPanelMensajeBox.setBounds(0,Constantes.chatMinHeight,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight);
+//		jPanelMensajeBox.setBackground(Constantes.jPanelChatBoxColor);
+		this.add(jPanelChatBox);
+	}
 
 }
