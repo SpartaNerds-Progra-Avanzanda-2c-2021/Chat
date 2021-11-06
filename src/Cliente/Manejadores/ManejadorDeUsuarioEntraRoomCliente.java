@@ -11,13 +11,14 @@ import Cliente.Cliente;
 import Graficos.JFramePrincipal;
 import Graficos.JPanelSala;
 import Utils.Peticion;
+import Utils.UserRoomInOutRequest;
 
-public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala>{
+public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<UserRoomInOutRequest>{
 
 	@Override
-	public void manejar(Peticion<Sala> peticion, JFramePrincipal jFramePrincipal)
+	public void manejar(Peticion<UserRoomInOutRequest> peticion, JFramePrincipal jFramePrincipal)
 			throws UnknownHostException, Exception {
-		Sala sala = peticion.getData();
+		Sala sala = peticion.getData().getSala();
 		
 		//actualizar los conectados
 		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalas.getSalas();
@@ -34,19 +35,15 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 			}
 		}
 		
-		if(panelSalaBuscada != null) {
-			for (Conexion conexion : salaBuscada.getConexiones()) {
-				if(conexion.getUsuario().getId() == (int)Cliente.clienteId) {
-					panelSalaBuscada.switchConection();
-				}
-			}
+		if(panelSalaBuscada == null) {
+			return;
 		}
 		
-		ArrayList<Mensaje> msj = sala.getMensajes();
-		Cliente.salasPosibles.put(salaBuscada.getNombre(), msj);
-		
-		for (Mensaje mensaje : msj) {
-			jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje);
+		if(peticion.getData().getUsuarioId() == (int)Cliente.clienteId) {
+			panelSalaBuscada.switchConection();
+			ArrayList<Mensaje> msj = sala.getMensajes();
+			Cliente.salasPosibles.put(salaBuscada.getNombre(), msj);
+			jFramePrincipal.jPanelComunication.setearMensaje(msj);
 		}
 	}
 }

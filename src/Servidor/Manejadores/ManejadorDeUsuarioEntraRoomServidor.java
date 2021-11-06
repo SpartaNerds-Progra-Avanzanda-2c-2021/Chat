@@ -13,6 +13,7 @@ import App.Usuario;
 import Servidor.ServerClient;
 import Utils.Acciones;
 import Utils.Peticion;
+import Utils.UserRoomInOutRequest;
 
 public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<String> {
 
@@ -46,7 +47,8 @@ public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<St
 		
 		//deberia enviarselo solamente a los clientes dentro de la sala
 		for (ServerClient cliente : clientes) {
-			Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_ENTERS_ROOM, salaBuscada);
+			UserRoomInOutRequest userRoomInOutRequest = new UserRoomInOutRequest(salaBuscada, solicitante.id);
+			Peticion<UserRoomInOutRequest> serverMessage = new Peticion<UserRoomInOutRequest>(Acciones.USER_ENTERS_ROOM, userRoomInOutRequest);
 			new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessage);
 		}
 	}

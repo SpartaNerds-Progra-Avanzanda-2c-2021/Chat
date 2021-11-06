@@ -52,7 +52,6 @@ public class JPanelSala extends JPanel{
 	
 	private void leaveRoom() {
 		if(!conectado) {
-			
 			Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_ENTERS_ROOM, nombre);
 			try {
 				new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
@@ -67,7 +66,6 @@ public class JPanelSala extends JPanel{
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			switchConection();	
 		}
 	}
 	
