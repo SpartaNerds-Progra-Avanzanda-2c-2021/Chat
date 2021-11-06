@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import App.Sala;
 import Cliente.Cliente;
 import Graficos.JFramePrincipal;
-import Graficos.JPanelSala;
 
 import Utils.Peticion;
 

@@ -28,9 +28,11 @@ import javax.swing.JTable;
 
 public class JFramePrincipal extends JFrame {
 	public JTable tblClientes;
-	public JPanelSalasYChats jPanelSalasYChats;
+	public JPanelSalas jPanelSalas;
+	public JPanelUsuarios jPanelUsuarios;
 	public static JPanelComunication jPanelComunication;
-
+	public boolean userShowed = false;
+	
 	/**
 	 * Create the frame.
 	 */
@@ -43,19 +45,37 @@ public class JFramePrincipal extends JFrame {
 	}
 
 	private void addJPanelChat() {
+		int widthIfIsUserJpanelShowed = userShowed?Constantes.usersWidth:0;
 		jPanelComunication = new JPanelComunication();
-		jPanelComunication.setBounds(Constantes.salaWidth, 0, Constantes.chatMinWidth-Constantes.salaWidth, this.getHeight());
+		jPanelComunication.setBounds(Constantes.salaWidth, 0, Constantes.chatMinWidth-Constantes.salaWidth-widthIfIsUserJpanelShowed, this.getHeight());
 		jPanelComunication.setLayout(null);
 		jPanelComunication.setBackground(Constantes.jPanelMessagesColor);
 		getContentPane().add(jPanelComunication);
 	}
 	
+	public void switchJPanelUsuarios() {
+		if(!userShowed) {
+			jPanelUsuarios = new JPanelUsuarios();
+			this.setSize(new Dimension(Constantes.chatMinWidth+Constantes.usersWidth,this.getHeight()));
+			jPanelUsuarios.setBounds(this.getWidth()-Constantes.usersWidth, 0, Constantes.usersWidth, this.getHeight());
+			jPanelUsuarios.setLayout(null);
+			jPanelUsuarios.setBackground(Constantes.jPanelSalasYChatsColor);
+			getContentPane().add(jPanelUsuarios);
+			userShowed = true;
+		}else {
+			jPanelSalas = new JPanelSalas();
+			this.setSize(new Dimension(Constantes.chatMinWidth,this.getHeight()));
+			getContentPane().remove(jPanelUsuarios);
+			userShowed = false;
+		}
+	}
+
 	private void addJPanelSalas() {
-		jPanelSalasYChats = new JPanelSalasYChats();
-		jPanelSalasYChats.setBounds(0, 0, Constantes.salaWidth, this.getHeight());
-		jPanelSalasYChats.setLayout(null);
-		jPanelSalasYChats.setBackground(Constantes.jPanelSalasYChatsColor);
-		getContentPane().add(jPanelSalasYChats);
+		jPanelSalas = new JPanelSalas();
+		jPanelSalas.setBounds(0, 0, Constantes.salaWidth, this.getHeight());
+		jPanelSalas.setLayout(null);
+		jPanelSalas.setBackground(Constantes.jPanelSalasYChatsColor);
+		getContentPane().add(jPanelSalas);
 	}
 
 	private void iniciarPantallaPrincipal() {
@@ -70,15 +90,19 @@ public class JFramePrincipal extends JFrame {
 		
 		this.addComponentListener(new ComponentAdapter() {
 		    public void componentResized(ComponentEvent componentEvent) {
-		    	pantallaPrincipalResized(componentEvent.getComponent().getWidth(), componentEvent.getComponent().getHeight());
+		    	pantallaPrincipalResized();
 		    }
 		});
 	}
 	
-	private void pantallaPrincipalResized(int width ,int height) {
-		jPanelSalasYChats.setSize((int)jPanelSalasYChats.getSize().getWidth(), height);
-		jPanelComunication.setSize(width-(int)jPanelSalasYChats.getSize().getWidth(), height);
-		//TODO
+	private void pantallaPrincipalResized() {
+		int widthIfIsUserJpanelShowed = userShowed?Constantes.usersWidth:0;
+		
+		jPanelSalas.setSize((int)jPanelSalas.getSize().getWidth(), this.getHeight());
+		jPanelComunication.setSize(this.getWidth()-Constantes.salaWidth-widthIfIsUserJpanelShowed, this.getHeight());
+		if(userShowed) {
+			jPanelUsuarios.setBounds(this.getWidth()-Constantes.usersWidth, 0, Constantes.usersWidth, this.getHeight());	
+		}
 	}
 
 	/**

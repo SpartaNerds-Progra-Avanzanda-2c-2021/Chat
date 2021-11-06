@@ -29,11 +29,11 @@ import GraficosViejos.VentanaABMCliente;
 import Utils.Acciones;
 import Utils.Peticion;
 
-public class JPanelSalasYChats extends JPanel{
+public class JPanelSalas extends JPanel{
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
 	private JPanelSalasYChatTitulo jPanelSalasYChatTitulo;
 	
-	public JPanelSalasYChats() {
+	public JPanelSalas() {
 		super();
 		addTituloAndAddButton();
 	}
@@ -61,22 +61,22 @@ public class JPanelSalasYChats extends JPanel{
 			public void mouseExited(MouseEvent e) {
 				e.getComponent().setBackground(Constantes.jPanelSalasYChatsColor);
 			}
-
 			public void mouseEntered(MouseEvent e) {
 				e.getComponent().setBackground(Constantes.salaHoverColor);
 			}
-
 			public void mouseClicked(MouseEvent e) {
-				showUsers();
+				try {
+					JPanelSala salaFocus = (JPanelSala) e.getComponent();
+					Peticion<String> serverMessage = new Peticion<String>(Acciones.SEND_USERS_TO_USERS,salaFocus.getNombre());
+					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 		salas.add(panel);
 		this.add(panel);
 		this.updateUI();
-	}
-	
-	private void showUsers(){
-		
 	}
 }

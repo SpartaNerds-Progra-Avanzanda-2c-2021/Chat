@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import App.Conexion;
 import App.Mensaje;
 import App.Sala;
-import Cliente.Cliente;
 import Graficos.JFramePrincipal;
 import Graficos.JPanelSala;
 import Utils.Peticion;
@@ -20,7 +19,7 @@ public class ManejadorDeUsuarioSaleRoomCliente extends ManejadorDelCliente<Sala>
 		Sala sala = peticion.getData();
 		
 		//actualizar los conectados
-		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalasYChats.getSalas();
+		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalas.getSalas();
 		
 		for (JPanelSala panelSala : panelSalas) { 
 			if (sala.getNombre().equals(panelSala.getNombre())) {

@@ -20,7 +20,7 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 		Sala sala = peticion.getData();
 		
 		//actualizar los conectados
-		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalasYChats.getSalas();
+		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalas.getSalas();
 		
 		JPanelSala panelSalaBuscada = null;
 		Sala salaBuscada = null;
