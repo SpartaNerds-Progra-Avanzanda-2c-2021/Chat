@@ -25,13 +25,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 
 public class JFramePrincipal extends JFrame {
 	public JPanelSalas jPanelSalas;
 	public JPanelUsuarios jPanelUsuarios;
 	public JPanelComunication jPanelComunication;
 	public boolean userShowed = false;
-	
+	public JDialogLogin login;
+
 	/**
 	 * Create the frame.
 	 */
@@ -39,6 +41,8 @@ public class JFramePrincipal extends JFrame {
 		this.addJPanelSalas();
 		this.addJPanelChat();
 		this.iniciarPantallaPrincipal();
+		
+		iniciarLogin();
 		
 		jPanelSalas.setJPanelComunication(jPanelComunication);
 	}
@@ -88,6 +92,18 @@ public class JFramePrincipal extends JFrame {
 		getContentPane().add(jPanelSalas);
 	}
 
+	private void iniciarLogin() {
+		login = new JDialogLogin();
+		login.setBounds(0, 0, 400, 130);
+		login.setResizable(false);
+		login.setLocationRelativeTo(null);
+		login.setTitle("Login");
+		login.setModal(true);
+		login.getContentPane().setLayout(null);
+		login.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		login.setVisible(true);
+	}
+	
 	private void iniciarPantallaPrincipal() {
 		getContentPane().setLayout(null);
 
