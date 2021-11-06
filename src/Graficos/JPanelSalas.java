@@ -28,13 +28,12 @@ import Cliente.Cliente;
 import GraficosViejos.VentanaABMCliente;
 import Utils.Acciones;
 import Utils.Peticion;
-import Utils.SalaCallback;
 
 
 public class JPanelSalas extends JPanel{
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
 	private JPanelSalasYChatTitulo jPanelSalasYChatTitulo;
-	private SalaCallback salaCallback;
+	private JPanelComunication jPanelComunication;
 	
 	public JPanelSalas() {
 		super();
@@ -43,10 +42,6 @@ public class JPanelSalas extends JPanel{
 
 	public ArrayList<JPanelSala> getSalas() {
 		return this.salas;
-	}
-	
-	public void setSalaCallback(SalaCallback salaCallback) {
-		this.salaCallback = salaCallback;
 	}
 	
 	private void addTituloAndAddButton() {
@@ -72,27 +67,27 @@ public class JPanelSalas extends JPanel{
 				e.getComponent().setBackground(Constantes.salaHoverColor);
 			}
 			public void mouseClicked(MouseEvent e) {
-				if (salaCallback != null && panel.isConectado()) {
-					salaCallback.onClickSala(nombre);
-				}
-
-				try {
-					JPanelSala salaFocus = (JPanelSala) e.getComponent();
-					Peticion<String> serverMessage = new Peticion<String>(Acciones.SEND_USERS_TO_USERS,salaFocus.getNombre());
-					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-				if (Cliente.salasPosibles.containsKey(nombre)) {
-					Cliente.salaActual = nombre;
-					JPanelMensajeBox.setearMensaje(Cliente.salasPosibles.get(Cliente.salaActual));
-
-				}
+				JPanelSalaClicked(nombre, panel);
 			}
 		});
 
 		salas.add(panel);
 		this.add(panel);
 		this.updateUI();
+	}
+	
+	public void JPanelSalaClicked(String nombre, JPanelSala panel) {
+		if (panel.isConectado()) {
+			jPanelComunication.setVisible(true);
+			jPanelComunication.setNombreSala(nombre);
+		}
+		if (Cliente.salasPosibles.containsKey(nombre)) {
+			Cliente.salaActual = nombre;
+			JPanelMensajeBox.setearMensaje(Cliente.salasPosibles.get(Cliente.salaActual));
+		}
+	}
+	
+	public void setJPanelComunication(JPanelComunication jPanelComunication) {
+		this.jPanelComunication=jPanelComunication;
 	}
 }

@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -23,20 +25,42 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import App.Mensaje;
+import Cliente.Cliente;
 import GraficosViejos.VentanaABMCliente;
+import Utils.Acciones;
+import Utils.Peticion;
 
 public class JPanelComunication extends JPanel{
 	private static JPanelChatBox jPanelChatBox;
 	private static JPanelMensajeBox jPanelMensajeBox; //cambiar a NO static
-	private static JLabel jLabel;
-
+	private static JLabel jLabelNombreSala;
+	
 	public JPanelComunication() {
 		super();
-		jLabel = new JLabel();
-		jLabel.setBounds( (Constantes.chatMinWidth-Constantes.salaWidth)*8/10, 0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.salaHeight);
+		addJLabelNombreSala();
 		addChatBox();
 		addMensajesBox();
-		add(jLabel);
+	}
+
+	private void addJLabelNombreSala() {
+		jLabelNombreSala = new JLabel();
+		jLabelNombreSala.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				jLabelNombreSalaClicked((JLabel)e.getComponent());
+			}
+		});
+		
+		jLabelNombreSala.setBounds( (Constantes.chatMinWidth-Constantes.salaWidth)*8/10, 0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.salaHeight);
+		add(jLabelNombreSala);
+	}
+	
+	private void jLabelNombreSalaClicked(JLabel jLabelTitulo) {
+		try {
+			Peticion<String> serverMessage = new Peticion<String>(Acciones.SEND_USERS_TO_USERS,jLabelTitulo.getText());
+			new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	private void addChatBox() {
@@ -52,15 +76,15 @@ public class JPanelComunication extends JPanel{
 		this.add(jPanelMensajeBox);
 	}
 
-	public static void addPanelMensaje(Mensaje info){
+	public void addPanelMensaje(Mensaje info){
 		jPanelMensajeBox.addMensaje(info);
 	}
 	
 	public void setNombreSala(String nombre) {
-		jLabel.setText(nombre);
+		jLabelNombreSala.setText(nombre);
 	}
 
-	public static void setearMensaje(ArrayList<Mensaje> mensajes){
+	public void setearMensaje(ArrayList<Mensaje> mensajes){
 		jPanelMensajeBox.setearMensaje(mensajes);
 	}
 }

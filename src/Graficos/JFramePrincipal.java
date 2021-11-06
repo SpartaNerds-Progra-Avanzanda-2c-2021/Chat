@@ -10,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import App.Lobby;
-import Utils.SalaCallback;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -28,7 +27,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class JFramePrincipal extends JFrame {
-	public JTable tblClientes;
 	public JPanelSalas jPanelSalas;
 	public JPanelUsuarios jPanelUsuarios;
 	public static JPanelComunication jPanelComunication;
@@ -38,11 +36,10 @@ public class JFramePrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public JFramePrincipal() {
-		
 		this.addJPanelSalas();
 		this.addJPanelChat();
-		
 		this.iniciarPantallaPrincipal();
+		jPanelSalas.setJPanelComunication(jPanelComunication);
 	}
 
 	private void addJPanelChat() {
@@ -73,18 +70,10 @@ public class JFramePrincipal extends JFrame {
 	}
 
 	private void addJPanelSalas() {
-
 		jPanelSalas = new JPanelSalas();
 		jPanelSalas.setBounds(0, 0, Constantes.salaWidth, this.getHeight());
 		jPanelSalas.setLayout(null);
 		jPanelSalas.setBackground(Constantes.jPanelSalasYChatsColor);
-		jPanelSalas.setSalaCallback(new SalaCallback() {
-			@Override
-			public void onClickSala(String nombreSala) {
-				jPanelComunication.setVisible(true);
-				jPanelComunication.setNombreSala(nombreSala);
-			}			
-		});
 		getContentPane().add(jPanelSalas);
 	}
 
