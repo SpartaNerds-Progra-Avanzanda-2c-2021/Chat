@@ -31,15 +31,17 @@ import Utils.Acciones;
 import Utils.Peticion;
 
 public class JPanelComunication extends JPanel{
-	private static JPanelChatBox jPanelChatBox;
-	private static JPanelMensajeBox jPanelMensajeBox; //cambiar a NO static
-	private static JLabel jLabelNombreSala;
+	private JPanelChatBox jPanelChatBox;
+	public JPanelMensajeBox jPanelMensajeBox; //cambiar a NO static
+	private JLabel jLabelNombreSala;
 	
 	public JPanelComunication() {
 		super();
 		addJLabelNombreSala();
 		addChatBox();
 		addMensajesBox();
+		
+		jPanelChatBox.setJPanelMensajeBox(jPanelMensajeBox);
 	}
 
 	private void addJLabelNombreSala() {

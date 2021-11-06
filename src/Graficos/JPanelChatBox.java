@@ -21,8 +21,8 @@ import Utils.Peticion;
 public class JPanelChatBox extends JPanel{
 
     public static JTextArea jAreaTexto;
-    public static JScrollPane jPanelDeslizable;
-    public static JPanel jAreaBotones;
+    public JScrollPane jPanelDeslizable;
+    public JPanelAreaBtn jAreaBotones;
     
 	
 	public JPanelChatBox() {
@@ -43,5 +43,8 @@ public class JPanelChatBox extends JPanel{
 		jAreaBotones.setBounds(0,0, (Constantes.chatMinWidth-Constantes.salaWidth)*4/10, Constantes.chatMinHeight*2/9 );
 		this.add(jAreaBotones);
 	}
-	
+
+	public void setJPanelMensajeBox(JPanelMensajeBox jPanelMensajeBox) {
+		jAreaBotones.setJPanelMensajeBox(jPanelMensajeBox);
+	}
 }

@@ -22,6 +22,7 @@ import Utils.Peticion;
 public class JPanelAreaBtn extends JPanel {
     private JButton btnEnviarTexto;
     private JButton btnDescargarTexto;
+    private JPanelMensajeBox jPanelMensajeBox;
 
 	public JPanelAreaBtn() {
 		addBotonEnviar();
@@ -67,7 +68,7 @@ public class JPanelAreaBtn extends JPanel {
                     PrintWriter escritor;
                     try {
                         escritor = new PrintWriter(new FileWriter(fileToSave.getAbsolutePath() + ".txt"));
-                        escritor.print(JPanelMensajeBox.getChatLog());
+                        escritor.print(jPanelMensajeBox.getChatLog());
                         escritor.close();
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
@@ -79,4 +80,8 @@ public class JPanelAreaBtn extends JPanel {
         });
         this.add(btnDescargarTexto);
     }
+	
+	public void setJPanelMensajeBox(JPanelMensajeBox jPanelMensajeBox) {
+		this.jPanelMensajeBox = jPanelMensajeBox;		
+	}
 }

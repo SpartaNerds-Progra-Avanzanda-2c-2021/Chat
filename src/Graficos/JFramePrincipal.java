@@ -29,7 +29,7 @@ import javax.swing.JTable;
 public class JFramePrincipal extends JFrame {
 	public JPanelSalas jPanelSalas;
 	public JPanelUsuarios jPanelUsuarios;
-	public static JPanelComunication jPanelComunication;
+	public JPanelComunication jPanelComunication;
 	public boolean userShowed = false;
 	
 	/**
@@ -39,6 +39,7 @@ public class JFramePrincipal extends JFrame {
 		this.addJPanelSalas();
 		this.addJPanelChat();
 		this.iniciarPantallaPrincipal();
+		
 		jPanelSalas.setJPanelComunication(jPanelComunication);
 	}
 
@@ -62,7 +63,7 @@ public class JFramePrincipal extends JFrame {
 			getContentPane().add(jPanelUsuarios);
 			userShowed = true;
 		}else {
-			jPanelSalas = new JPanelSalas();
+			jPanelUsuarios = new JPanelUsuarios();
 			this.setSize(new Dimension(Constantes.chatMinWidth,this.getHeight()));
 			getContentPane().remove(jPanelUsuarios);
 			userShowed = false;

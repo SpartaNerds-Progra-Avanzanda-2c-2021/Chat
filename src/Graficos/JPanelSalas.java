@@ -34,6 +34,7 @@ public class JPanelSalas extends JPanel{
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
 	private JPanelSalasYChatTitulo jPanelSalasYChatTitulo;
 	private JPanelComunication jPanelComunication;
+	private JPanelMensajeBox jPanelMensajeBox;
 	
 	public JPanelSalas() {
 		super();
@@ -83,11 +84,12 @@ public class JPanelSalas extends JPanel{
 		}
 		if (Cliente.salasPosibles.containsKey(nombre)) {
 			Cliente.salaActual = nombre;
-			JPanelMensajeBox.setearMensaje(Cliente.salasPosibles.get(Cliente.salaActual));
+			jPanelMensajeBox.setearMensaje(Cliente.salasPosibles.get(Cliente.salaActual));
 		}
 	}
 	
 	public void setJPanelComunication(JPanelComunication jPanelComunication) {
 		this.jPanelComunication=jPanelComunication;
+		this.jPanelMensajeBox = jPanelComunication.jPanelMensajeBox;
 	}
 }

@@ -37,13 +37,13 @@ public class JPanelMensajeBox extends JPanel {
 		jTextAreaMensajes.append(aux);
 	}
 	
-	public static void setearMensaje(ArrayList<Mensaje> msj) {
+	public void setearMensaje(ArrayList<Mensaje> msj) {
 		jTextAreaMensajes.setText("");
 		for (Mensaje mensaje : msj) {
 			jTextAreaMensajes.append(mensaje.toString());
 		}
 	}
-    public static String getChatLog() {
+    public String getChatLog() {
         return jTextAreaMensajes.getText();
     }
 }
