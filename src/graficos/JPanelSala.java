@@ -22,7 +22,6 @@ import utils.Peticion;
 public class JPanelSala extends JPanel{
 	private String nombre;
 	private int cantConexiones;
-	private int cantMensajesNuevos;
 	private JLabel cantConexionesLabel;
 	private JButton salirButton;
 	private boolean conectado = false;
@@ -31,11 +30,9 @@ public class JPanelSala extends JPanel{
 		super();
 		this.nombre = nombre;
 		this.cantConexiones = cantConexiones;
-		this.cantMensajesNuevos = cantMensajesNuevos;
 		
 		addNombre();
 		addCantConexiones();
-		addCantMensajesNuevos();
 		addButtonDesconectar();
 	}
 	
@@ -76,16 +73,6 @@ public class JPanelSala extends JPanel{
 		label.setBounds(0,0,Constantes.salaWidth/2,Constantes.salaHeight/2);  
 		
 	    this.add(label);
-	}
-	
-	private void addCantMensajesNuevos() {
-		String mensaje = "Msj: "+String.valueOf(this.cantMensajesNuevos);
-		JLabel label = new JLabel(mensaje,SwingConstants.RIGHT);  
-		label.setBorder(new EmptyBorder(0,0,0,15));
-		label.setFont(new Font("BOLD", Font.PLAIN, 11));
-		label.setBounds(Constantes.salaWidth / 2, 0, Constantes.salaWidth / 2,
-				Constantes.salaHeight / 2);
-		this.add(label);
 	}
 	
 	private void addCantConexiones() {
