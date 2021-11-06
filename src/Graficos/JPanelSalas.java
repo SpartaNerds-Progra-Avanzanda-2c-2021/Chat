@@ -1,6 +1,5 @@
 package Graficos;
 
-
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
@@ -30,17 +30,18 @@ import Utils.Acciones;
 import Utils.Peticion;
 import Utils.SalaCallback;
 
-public class JPanelSalasYChats extends JPanel{
+
+public class JPanelSalas extends JPanel{
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
 	private JPanelSalasYChatTitulo jPanelSalasYChatTitulo;
 	private SalaCallback salaCallback;
 	
-	public JPanelSalasYChats() {
+	public JPanelSalas() {
 		super();
 		addTituloAndAddButton();
 	}
-	
-	public ArrayList<JPanelSala> getSalas(){
+
+	public ArrayList<JPanelSala> getSalas() {
 		return this.salas;
 	}
 	
@@ -50,14 +51,14 @@ public class JPanelSalasYChats extends JPanel{
 	
 	private void addTituloAndAddButton() {
 		jPanelSalasYChatTitulo = new JPanelSalasYChatTitulo();
-		jPanelSalasYChatTitulo.setBounds(0,0,Constantes.salaWidth,Constantes.salaHeight);
+		jPanelSalasYChatTitulo.setBounds(0, 0, Constantes.salaWidth, Constantes.salaHeight);
 		jPanelSalasYChatTitulo.setBackground(Constantes.salaHoverColor);
 		jPanelSalasYChatTitulo.setLayout(null);
 		jPanelSalasYChatTitulo.setBackground(Constantes.jPanelSalasYChatTituloColor);
 		this.add(jPanelSalasYChatTitulo);
 	}
 
-	public void addJPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos ) {
+	public void addJPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos) {
 		JPanelSala panel = new JPanelSala(nombre, cantConexiones, cantMensajesNuevos);
 		panel.setLayout(null);
 		panel.setBounds(0, Constantes.salaHeight * (salas.size() + 1), Constantes.salaWidth, Constantes.salaHeight);
@@ -67,25 +68,31 @@ public class JPanelSalasYChats extends JPanel{
 			public void mouseExited(MouseEvent e) {
 				e.getComponent().setBackground(Constantes.jPanelSalasYChatsColor);
 			}
-
 			public void mouseEntered(MouseEvent e) {
 				e.getComponent().setBackground(Constantes.salaHoverColor);
 			}
-
 			public void mouseClicked(MouseEvent e) {
-				showUsers();
 				if (salaCallback != null && panel.isConectado()) {
 					salaCallback.onClickSala(nombre);
 				}
+
+				try {
+					JPanelSala salaFocus = (JPanelSala) e.getComponent();
+					Peticion<String> serverMessage = new Peticion<String>(Acciones.SEND_USERS_TO_USERS,salaFocus.getNombre());
+					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				if (Cliente.salasPosibles.containsKey(nombre)) {
+					Cliente.salaActual = nombre;
+					JPanelMensajeBox.setearMensaje(Cliente.salasPosibles.get(Cliente.salaActual));
+
+				}
 			}
 		});
-		
+
 		salas.add(panel);
 		this.add(panel);
 		this.updateUI();
-	}
-	
-	private void showUsers(){
-		
 	}
 }

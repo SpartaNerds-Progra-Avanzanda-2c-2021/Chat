@@ -20,12 +20,13 @@ public class ManejadorDeUsuarioSaleRoomCliente extends ManejadorDelCliente<Sala>
 		Sala sala = peticion.getData();
 		
 		//actualizar los conectados
-		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalasYChats.getSalas();
+		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalas.getSalas();
 		
 		for (JPanelSala panelSala : panelSalas) { 
 			if (sala.getNombre().equals(panelSala.getNombre())) {
 				panelSala.actualizarCantConexiones(sala.getConexiones().size());
 				panelSala.updateJLabel();
+				Cliente.salasPosibles.remove(sala.getNombre());
 			}
 		}
 	}

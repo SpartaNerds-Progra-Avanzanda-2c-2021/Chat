@@ -13,30 +13,30 @@ import Servidor.ServerClient;
 import Utils.Acciones;
 import Utils.Peticion;
 
-public class ManejadorDeMensajeDeUsuarioEnSalaDelServidor extends ManejadorDelServidor<Sala> {
+public class ManejadorDeMensajeDeUsuarioEnSalaDelServidor extends ManejadorDelServidor<Mensaje> {
 
 	@Override
-	public void manejar(Peticion<Sala> peticion, ArrayList<ServerClient> clientes, ServerClient solicitante, Lobby lobby)
+	public void manejar(Peticion<Mensaje> peticion, ArrayList<ServerClient> clientes, ServerClient solicitante, Lobby lobby)
 			throws Exception {
-		InetAddress address = InetAddress.getLocalHost();
-		String ip = address.getHostAddress();
 
-		Sala salaBuscada = new Sala(peticion.getData().getNombre());
+		Sala salaBuscada = new Sala(peticion.getData().sala);
 		ArrayList<Sala> salas = lobby.getSalas();
 
 		for (Sala sala : salas) {
 			if (sala.getNombre().equals(salaBuscada.getNombre()))
 				salaBuscada = sala;
 		}
-		Mensaje mensaje = new Mensaje(peticion.getData().getMensajeTope().getPropietario(), System.currentTimeMillis(),
-				ip + ": " + peticion.getData().getMensajeTope().getInfo());
-		salaBuscada.addMensaje(mensaje);
-
-		//Enviar esto solo a los usuarios dentro de la salaBuscada		
 		
-		for (ServerClient cliente : clientes) {
-			Peticion<Mensaje> serverMessage = new Peticion<Mensaje>(Acciones.USER_SEND_ROOM_SMG, mensaje);
-			new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessage);
+		salaBuscada.addMensaje(peticion.getData());
+
+		//Enviar esto solo a los usuarios dentro de la salaBuscada
+		for (ServerClient serverClient : clientes) {
+			for (Conexion coexion : salaBuscada.getConexiones()) {
+				if(coexion.getUsuario().getId() == serverClient.id) {
+					Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_SEND_ROOM_SMG, salaBuscada);
+					new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);			
+				}
+			}		
 		}
 	}
 }

@@ -5,20 +5,22 @@ import java.util.Date;
 
 public class Mensaje implements Serializable{
 	private int propietario;
-	private Long createdAt;
+	private Date createdAt;
 	private String info;
+	public String sala;
 	
-	public Mensaje(int propietario, Long createdAt, String info) {
+	public Mensaje(int propietario, Date createdAt, String info, String sala) {
 		super();
 		this.propietario = propietario;
 		this.createdAt = createdAt;
 		this.info = info;
+		this.sala = sala;
 	}
 	
 	public int getPropietario() {
 		return propietario;
 	}
-	public Long getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 	public String getInfo() {

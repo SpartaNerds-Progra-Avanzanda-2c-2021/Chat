@@ -6,6 +6,7 @@ public class Constantes {
 	public static int chatMinWidth = 600;
 	public static int chatMinHeight = 600;
 	public static int salaWidth = 220;
+	public static int usersWidth = 240;
 	public static int salaHeight = 55;
 	
 	public static Color jPanelMessagesColor = new Color(173,216,230);

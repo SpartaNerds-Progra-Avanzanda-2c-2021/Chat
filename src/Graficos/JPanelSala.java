@@ -52,12 +52,14 @@ public class JPanelSala extends JPanel{
 	
 	private void leaveRoom() {
 		if(!conectado) {
+			
 			Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_ENTERS_ROOM, nombre);
 			try {
 				new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+			Cliente.salaActual = nombre;
 		}else {
 			Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_LEAVE_ROOM,this.nombre);
 			try {

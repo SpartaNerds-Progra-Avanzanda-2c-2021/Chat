@@ -1,15 +1,21 @@
 package Cliente.Manejadores;
 
 import App.Mensaje;
+import App.Sala;
+import Cliente.Cliente;
 import Graficos.JFramePrincipal;
 import Utils.Peticion;
 
-public class ManejadorDeMensajeDeUsuarioEnSalaDelCliente extends ManejadorDelCliente<Mensaje>{
+public class ManejadorDeMensajeDeUsuarioEnSalaDelCliente extends ManejadorDelCliente<Sala>{
 
 	@Override
-	public void manejar(Peticion<Mensaje> peticion, JFramePrincipal jFramePrincipal) throws Exception {
-		System.out.println(peticion.getData().getInfo()+"\n");
+	public void manejar(Peticion<Sala> peticion, JFramePrincipal jFramePrincipal) throws Exception {
+		Sala sala = peticion.getData();
 		
-		//jFramePrincipal.jPanelComunication.addPanelMensaje(peticion.getData().getPropietario(), peticion.getData().getCreatedAt(), peticion.getData().getInfo());
+		Cliente.salasPosibles.put(sala.getNombre(),sala.getMensajes());
+		
+		if(sala.getNombre().equals(Cliente.salaActual)) {
+			jFramePrincipal.jPanelComunication.setearMensaje(sala.getMensajes());
+		}
 	}
 }

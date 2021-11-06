@@ -20,7 +20,7 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 		Sala sala = peticion.getData();
 		
 		//actualizar los conectados
-		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalasYChats.getSalas();
+		ArrayList<JPanelSala> panelSalas = jFramePrincipal.jPanelSalas.getSalas();
 		
 		JPanelSala panelSalaBuscada = null;
 		Sala salaBuscada = null;
@@ -43,10 +43,10 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<Sala
 		}
 		
 		ArrayList<Mensaje> msj = sala.getMensajes();
+		Cliente.salasPosibles.put(salaBuscada.getNombre(), msj);
 		
 		for (Mensaje mensaje : msj) {
-			//pintar todos los mensajes
-			//jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje.getPropietario(), mensaje.getCreatedAt(), mensaje.getInfo());			
+			jFramePrincipal.jPanelComunication.addPanelMensaje(mensaje);
 		}
 	}
 }
