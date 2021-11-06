@@ -35,7 +35,7 @@ public class JPanelMensajeBox extends JPanel {
 		String aux = msj.toString();
 		jTextAreaMensajes.append(aux);
 	}
-
+	
 	public static void setearMensaje(ArrayList<Mensaje> msj) {
 		jTextAreaMensajes.setText("");
 		for (Mensaje mensaje : msj) {

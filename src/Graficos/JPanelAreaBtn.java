@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -29,17 +30,13 @@ public class JPanelAreaBtn extends JPanel {
 		btnEnviarTexto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Mensaje msj = new Mensaje(0, 0L, JPanelChatBox.jAreaTexto.getText());
-				
-				JPanelComunication.addPanelMensaje(msj); // full sacar static
-				Cliente.salasPosibles.get(Cliente.salaActual).add(msj);
-//				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_SEND_ROOM_SMG,
-//						JPanelChatBox.jAreaTexto.getText());
-//				try {
-//					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-//				} catch (IOException e1) {
-//					e1.printStackTrace();
-//				}
+				Mensaje msj = new Mensaje((int) Cliente.clienteId, new Date(), JPanelChatBox.jAreaTexto.getText(), Cliente.salaActual);
+				Peticion<Mensaje> serverMessage = new Peticion<Mensaje>(Acciones.USER_SEND_ROOM_SMG,msj);
+				try {
+					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		this.add(btnEnviarTexto);

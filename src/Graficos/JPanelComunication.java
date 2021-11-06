@@ -47,8 +47,11 @@ public class JPanelComunication extends JPanel{
 		jPanelMensajeBox.setBackground(Constantes.jPanelMessagesColor);
 		this.add(jPanelMensajeBox);
 	}
-	
+
 	public static void addPanelMensaje(Mensaje info){
 		jPanelMensajeBox.addMensaje(info);
+	}
+	public static void setearMensaje(ArrayList<Mensaje> mensajes){
+		jPanelMensajeBox.setearMensaje(mensajes);
 	}
 }
