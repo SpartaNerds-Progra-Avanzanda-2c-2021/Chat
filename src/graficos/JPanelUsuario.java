@@ -28,6 +28,7 @@ public class JPanelUsuario extends JPanel{
 	private String nombre;
 	private Date conectadoDesde;
 	private JLabel tiempoConectadoLabel;
+	public boolean clicked = false;
 	
 	public JPanelUsuario(String nombre, Date conectadoDesde) {
 		super();

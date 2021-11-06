@@ -9,6 +9,7 @@ import app.Conexion;
 import app.Lobby;
 import app.Mensaje;
 import app.Sala;
+import app.Usuario;
 import servidor.ServerClient;
 import utils.Acciones;
 import utils.Peticion;
@@ -19,24 +20,37 @@ public class ManejadorDeMensajeDeUsuarioEnSalaDelServidor extends ManejadorDelSe
 	public void manejar(Peticion<Mensaje> peticion, ArrayList<ServerClient> clientes, ServerClient solicitante, Lobby lobby)
 			throws Exception {
 
-		Sala salaBuscada = new Sala(peticion.getData().sala);
+		Mensaje mensaje = peticion.getData();
+		
+		Sala salaBuscada = new Sala(mensaje.sala);
 		ArrayList<Sala> salas = lobby.getSalas();
-
 		for (Sala sala : salas) {
 			if (sala.getNombre().equals(salaBuscada.getNombre()))
 				salaBuscada = sala;
 		}
 		
-		salaBuscada.addMensaje(peticion.getData());
+		salaBuscada.addMensaje(mensaje);
 
 		//Enviar esto solo a los usuarios dentro de la salaBuscada
 		for (ServerClient serverClient : clientes) {
-			for (Conexion coexion : salaBuscada.getConexiones()) {
-				if(coexion.getUsuario().getId() == serverClient.id) {
+			for (Conexion conexionesDeLaSala : salaBuscada.getConexiones()) {
+				if(conexionesDeLaSala.getUsuario().getId() != serverClient.id) {
+					continue;
+				}
+				if(!mensaje.privado) {
 					Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_SEND_ROOM_SMG, salaBuscada);
-					new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);			
+					new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);
+					continue;
+				}
+				
+				for (Usuario usuario: mensaje.destinatarios) {
+					if(usuario.getId() == conexionesDeLaSala.getUsuario().getId()) {
+						Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_SEND_ROOM_SMG, salaBuscada);
+						new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);
+					}
 				}
 			}		
 		}
+		
 	}
 }

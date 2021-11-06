@@ -16,6 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import cliente.Cliente;
 import app.Mensaje;
+import app.Usuario;
 import utils.Acciones;
 import utils.Peticion;
 
@@ -37,6 +38,16 @@ public class JPanelAreaBtn extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				Mensaje msj = new Mensaje((int) Cliente.clienteId, new Date(), JPanelChatBox.jAreaTexto.getText(), Cliente.salaActual);
+				if(!Cliente.usuariosSeleccionadosIds.isEmpty()) {
+					msj.privado = true;
+					for (Number id : Cliente.usuariosSeleccionadosIds) {
+						Usuario usuario = new Usuario((int)id);
+						msj.addDestinatario(usuario);
+					}
+					Usuario usuario = new Usuario((int)Cliente.clienteId);
+					msj.addDestinatario(usuario);
+				}
+				
 				Peticion<Mensaje> serverMessage = new Peticion<Mensaje>(Acciones.USER_SEND_ROOM_SMG,msj);
 				try {
 					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);

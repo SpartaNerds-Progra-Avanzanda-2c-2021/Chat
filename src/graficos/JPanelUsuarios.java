@@ -66,15 +66,34 @@ public class JPanelUsuarios extends JPanel{
 
 		panel.addMouseListener(new MouseAdapter() {
 			public void mouseExited(MouseEvent e) {
-				e.getComponent().setBackground(Constantes.jPanelSalasYChatsColor);
+				if(!panel.clicked) {
+					e.getComponent().setBackground(Constantes.jPanelSalasYChatsColor);	
+				}
 			}
 			public void mouseEntered(MouseEvent e) {
-				e.getComponent().setBackground(Constantes.salaHoverColor);
+				if(!panel.clicked) {
+					e.getComponent().setBackground(Constantes.salaHoverColor);	
+				}
+			}
+			public void mouseClicked(MouseEvent e) {
+				panel.clicked = !panel.clicked;
+				if(panel.clicked) {
+					e.getComponent().setBackground(Constantes.salaHoverColor);	
+				}
+				JPanelUsuariosClicked(nombre);
 			}
 		});
 		
 		salas.add(panel);
 		this.add(panel);
 		this.updateUI();
+	}
+	
+	public void JPanelUsuariosClicked(String nombre) {
+		Number id = Integer.valueOf(nombre);
+		
+		if(!Cliente.usuariosSeleccionadosIds.remove(id)) {
+			Cliente.usuariosSeleccionadosIds.add(id);
+		}
 	}
 }

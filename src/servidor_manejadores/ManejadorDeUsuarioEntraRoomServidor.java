@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 import app.Conexion;
 import app.Lobby;
+import app.Mensaje;
 import app.Sala;
 import app.Usuario;
 import servidor.ServerClient;
@@ -47,12 +48,34 @@ public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<St
 		
 		//deberia enviarselo solamente a los clientes dentro de la sala
 		for (ServerClient cliente : clientes) {
-			UserRoomInOutRequest userRoomInOutRequest = new UserRoomInOutRequest(salaBuscada, solicitante.id);
-			Peticion<UserRoomInOutRequest> serverMessage = new Peticion<UserRoomInOutRequest>(Acciones.USER_ENTERS_ROOM, userRoomInOutRequest);
-			new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessage);
-			
-			Peticion<Sala> serverMessageUpdateUsers = new Peticion<Sala>(Acciones.UPDATE_USERS, salaBuscada);
-			new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessageUpdateUsers);
+			for (Conexion conexionesDeLaSala : salaBuscada.getConexiones()) {
+				if(conexionesDeLaSala.getUsuario().getId() != cliente.id) {
+					continue;
+				}
+				
+				ArrayList<Mensaje> mensajes = new ArrayList<Mensaje>();
+				
+				for (Mensaje mensaje : salaBuscada.getMensajes()) {
+					for (Usuario destinatario : mensaje.destinatarios) {
+						if(!mensaje.privado) {
+							mensajes.add(mensaje);
+							continue;
+						}
+						if(destinatario.getId() == cliente.id && mensaje.privado) {
+							mensajes.add(mensaje);
+						}
+					}
+				}
+				
+				UserRoomInOutRequest userRoomInOutRequest = new UserRoomInOutRequest(salaBuscada, solicitante.id);
+				userRoomInOutRequest.setMensaje(mensajes);
+				
+				Peticion<UserRoomInOutRequest> serverMessage = new Peticion<UserRoomInOutRequest>(Acciones.USER_ENTERS_ROOM, userRoomInOutRequest);
+				new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessage);
+				
+				Peticion<Sala> serverMessageUpdateUsers = new Peticion<Sala>(Acciones.UPDATE_USERS, salaBuscada);
+				new ObjectOutputStream(cliente.cliente.getOutputStream()).writeObject(serverMessageUpdateUsers);
+			}
 		}
 	}
 }

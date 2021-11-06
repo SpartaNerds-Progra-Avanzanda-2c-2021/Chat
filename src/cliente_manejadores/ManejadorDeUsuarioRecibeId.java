@@ -16,5 +16,6 @@ public class ManejadorDeUsuarioRecibeId extends ManejadorDelCliente<Number> {
 		Number clienteId = peticion.getData();
 
 		Cliente.clienteId = clienteId;
+		jFramePrincipal.setTitle(String.valueOf(clienteId));
 	}
 }

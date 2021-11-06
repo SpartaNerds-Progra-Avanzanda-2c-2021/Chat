@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import app.Lobby;
+import cliente.Cliente;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;

@@ -1,6 +1,7 @@
 package app;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Mensaje implements Serializable{
@@ -8,6 +9,8 @@ public class Mensaje implements Serializable{
 	private Date createdAt;
 	private String info;
 	public String sala;
+	public boolean privado = false;
+	public ArrayList<Usuario> destinatarios = new ArrayList<Usuario>();
 	
 	public Mensaje(int propietario, Date createdAt, String info, String sala) {
 		super();
@@ -32,4 +35,7 @@ public class Mensaje implements Serializable{
 		return propietario + "Se envio a las: " + createdAt + " " + info + "]\n";
 	}
 	
+	public void addDestinatario(Usuario destinatario) {
+		this.destinatarios.add(destinatario);
+	}	
 }

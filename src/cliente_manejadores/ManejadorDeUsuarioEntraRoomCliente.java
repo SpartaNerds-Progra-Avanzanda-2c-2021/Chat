@@ -41,7 +41,7 @@ public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<User
 		
 		if(peticion.getData().getUsuarioId() == (int)Cliente.clienteId) {
 			panelSalaBuscada.switchConection();
-			ArrayList<Mensaje> msj = sala.getMensajes();
+			ArrayList<Mensaje> msj = peticion.getData().mensajes;
 			Cliente.salasPosibles.put(salaBuscada.getNombre(), msj);
 			jFramePrincipal.jPanelComunication.setearMensaje(msj);
 		}

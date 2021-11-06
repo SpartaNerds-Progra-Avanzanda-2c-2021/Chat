@@ -20,6 +20,7 @@ public class Cliente {
 	public static Number clienteId;
 	public static JFramePrincipal jFramePrincipal;
 	public static String salaActual;
+	public static ArrayList<Number> usuariosSeleccionadosIds = new ArrayList<Number>();
 	public static Map<String, ArrayList<Mensaje>> salasPosibles = new TreeMap<String, ArrayList<Mensaje>>();
 	
 	public Cliente(int puerto, String ip) {
