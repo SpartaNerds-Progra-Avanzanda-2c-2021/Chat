@@ -42,4 +42,7 @@ public class JPanelMensajeBox extends JPanel {
 			jTextAreaMensajes.append(mensaje.toString());
 		}
 	}
+    public static String getChatLog() {
+        return jTextAreaMensajes.getText();
+    }
 }

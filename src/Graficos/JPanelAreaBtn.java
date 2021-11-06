@@ -2,12 +2,17 @@ package Graficos;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import App.Mensaje;
 import Cliente.Cliente;
@@ -42,20 +47,35 @@ public class JPanelAreaBtn extends JPanel {
 		this.add(btnEnviarTexto);
 	}
 	public void addBotonDescargar() {
-		btnDescargarTexto = new JButton("Descargar");
-		btnDescargarTexto.setBounds(50, 50, 90, 20);
+        btnDescargarTexto = new JButton("Descargar");
+        btnDescargarTexto.setBounds(50, 50, 90, 20);
 
-		btnDescargarTexto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_DOWNLOAD_ROOM_TEXT,
-						null);
-				try {
-					new ObjectOutputStream(Cliente.cliente.getOutputStream()).writeObject(serverMessage);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		this.add(btnDescargarTexto);
-	}
+        btnDescargarTexto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setDialogTitle("Specify a file to save");
+
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                FileNameExtensionFilter restrict = new FileNameExtensionFilter(".txt", "txt");
+                fileChooser.addChoosableFileFilter(restrict);
+
+                int userSelection = fileChooser.showSaveDialog(null);
+
+                if (userSelection == JFileChooser.APPROVE_OPTION) {
+                    File fileToSave = fileChooser.getSelectedFile();
+                    PrintWriter escritor;
+                    try {
+                        escritor = new PrintWriter(new FileWriter(fileToSave.getAbsolutePath() + ".txt"));
+                        escritor.print(JPanelMensajeBox.getChatLog());
+                        escritor.close();
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+
+                }
+            }
+        });
+        this.add(btnDescargarTexto);
+    }
 }
