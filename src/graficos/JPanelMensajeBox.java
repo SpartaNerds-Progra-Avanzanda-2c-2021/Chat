@@ -26,11 +26,11 @@ public class JPanelMensajeBox extends JPanel {
 		jTextAreaMensajes.setEditable(false);
 		jTextAreaMensajes.setLineWrap(true);
 		jTextAreaMensajes.setBounds(0,0,Constantes.chatMinWidth-Constantes.salaWidth,
-				Constantes.chatMinHeight-Constantes.ChatBoxHeight);
+				Constantes.chatMinHeight-Constantes.ChatBoxHeight+75);
 		
 		jScrollPane = new JScrollPane(jTextAreaMensajes);
 		jScrollPane.setBounds(0,0,Constantes.chatMinWidth-Constantes.salaWidth,
-				Constantes.chatMinHeight-Constantes.ChatBoxHeight);
+				Constantes.chatMinHeight-Constantes.ChatBoxHeight+75);
 		this.add(jScrollPane);
 	}
 

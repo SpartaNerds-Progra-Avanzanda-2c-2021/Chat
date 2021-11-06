@@ -34,7 +34,8 @@ public class JPanelChatBox extends JPanel{
 	public void addTextArea() {
 		jAreaTexto = new JTextArea();
 		jPanelDeslizable = new JScrollPane(jAreaTexto);
-		jPanelDeslizable.setPreferredSize(new Dimension((Constantes.chatMinWidth-Constantes.salaWidth)*6/10, Constantes.chatMinHeight*2/9));
+		jPanelDeslizable.setPreferredSize(new Dimension((Constantes.chatMinWidth-Constantes.salaWidth)*6/10, 
+				Constantes.chatMinHeight*1/8));
         this.add(jPanelDeslizable);
 	}
 
