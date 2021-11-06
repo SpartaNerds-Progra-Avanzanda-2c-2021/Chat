@@ -2,8 +2,8 @@ package Utils;
 
 import java.io.Serializable;
 
-import App.Sala;
-import App.Usuario;
+import app.Sala;
+import app.Usuario;
 
 public class UserRoomInOutRequest implements Serializable  {
 	private Sala sala;

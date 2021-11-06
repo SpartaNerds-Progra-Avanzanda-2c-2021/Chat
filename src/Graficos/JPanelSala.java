@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import App.Mensaje;
 import Cliente.Cliente;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Mensaje;
 
 public class JPanelSala extends JPanel{
 	private String nombre;

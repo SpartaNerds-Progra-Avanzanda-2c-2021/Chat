@@ -24,11 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import App.Mensaje;
 import Cliente.Cliente;
-import GraficosViejos.VentanaABMCliente;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Mensaje;
 
 public class JPanelComunication extends JPanel{
 	private JPanelChatBox jPanelChatBox;

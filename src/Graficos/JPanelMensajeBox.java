@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import App.Mensaje;
+import app.Mensaje;
 
 public class JPanelMensajeBox extends JPanel {
 	private String nombre;

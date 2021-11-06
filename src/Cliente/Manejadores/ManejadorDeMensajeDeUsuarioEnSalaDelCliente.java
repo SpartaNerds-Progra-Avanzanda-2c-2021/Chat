@@ -1,10 +1,10 @@
 package Cliente.Manejadores;
 
-import App.Mensaje;
-import App.Sala;
 import Cliente.Cliente;
 import Graficos.JFramePrincipal;
 import Utils.Peticion;
+import app.Mensaje;
+import app.Sala;
 
 public class ManejadorDeMensajeDeUsuarioEnSalaDelCliente extends ManejadorDelCliente<Sala>{
 

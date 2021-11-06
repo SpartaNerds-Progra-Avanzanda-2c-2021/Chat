@@ -25,7 +25,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import Cliente.Cliente;
-import GraficosViejos.VentanaABMCliente;
 import Utils.Acciones;
 import Utils.Peticion;
 

@@ -18,10 +18,10 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-import App.Mensaje;
 import Cliente.Cliente;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Mensaje;
 
 import javax.swing.JScrollPane;
 import java.awt.TextArea;

@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import App.Conexion;
-import App.Mensaje;
-import App.Sala;
 import Cliente.Cliente;
 import Graficos.JFramePrincipal;
 import Graficos.JPanelSala;
 import Utils.Peticion;
 import Utils.UserRoomInOutRequest;
+import app.Conexion;
+import app.Mensaje;
+import app.Sala;
 
 public class ManejadorDeUsuarioEntraRoomCliente extends ManejadorDelCliente<UserRoomInOutRequest>{
 

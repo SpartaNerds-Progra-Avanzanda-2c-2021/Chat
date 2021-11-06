@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import App.Mensaje;
 import Graficos.JFramePrincipal;
 import Servidor.Constantes;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Mensaje;
 
 public class Cliente {
 	public static Socket cliente;

@@ -5,13 +5,13 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import App.Conexion;
-import App.Lobby;
-import App.Mensaje;
-import App.Sala;
 import Servidor.ServerClient;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Conexion;
+import app.Lobby;
+import app.Mensaje;
+import app.Sala;
 
 public class ManejadorDeMensajeDeUsuarioEnSalaDelServidor extends ManejadorDelServidor<Mensaje> {
 

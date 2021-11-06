@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import App.Conexion;
-import App.Mensaje;
-import App.Sala;
-import App.Usuario;
 import Cliente.Cliente;
 import Graficos.JFramePrincipal;
 import Graficos.JPanelSala;
 import Utils.Peticion;
+import app.Conexion;
+import app.Mensaje;
+import app.Sala;
+import app.Usuario;
 
 public class ManejadorDeUsuarioSolicitaUsuarioCliente extends ManejadorDelCliente<ArrayList<Conexion>>{
 

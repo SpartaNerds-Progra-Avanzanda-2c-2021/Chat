@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import App.Lobby;
+import app.Lobby;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -63,9 +63,8 @@ public class JFramePrincipal extends JFrame {
 			getContentPane().add(jPanelUsuarios);
 			userShowed = true;
 		}else {
-			jPanelUsuarios = new JPanelUsuarios();
-			this.setSize(new Dimension(Constantes.chatMinWidth,this.getHeight()));
 			getContentPane().remove(jPanelUsuarios);
+			this.setSize(new Dimension(Constantes.chatMinWidth,this.getHeight()));
 			userShowed = false;
 		}
 	}

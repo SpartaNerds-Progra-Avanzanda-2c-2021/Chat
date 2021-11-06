@@ -3,7 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import App.Lobby;
+import app.Lobby;
 
 public class Servidor {
 	private ArrayList<ServerClient> clientes;

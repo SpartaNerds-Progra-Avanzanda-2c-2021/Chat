@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import App.Mensaje;
 import Cliente.Cliente;
+import Cliente.HiloEnrrutadorDeCliente;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Mensaje;
+
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -34,6 +36,8 @@ public class JPanelUsuario extends JPanel{
 		
 		addNombre();
 		addTiempoContectado();
+		
+		new HiloDeTiempoDeUsuario(tiempoConectadoLabel, conectadoDesde).start();
 	}
 	
 	private void addNombre() {
@@ -45,8 +49,6 @@ public class JPanelUsuario extends JPanel{
 	}
 	
 	private void addTiempoContectado() {
-//		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-
 	    long diffInMillies = Math.abs(this.conectadoDesde.getTime() - (new Date()).getTime());
 	    long diff = TimeUnit.SECONDS.convert(diffInMillies,TimeUnit.MILLISECONDS);
 		
@@ -60,10 +62,6 @@ public class JPanelUsuario extends JPanel{
 
 	public String getNombre() {
 		return this.nombre;
-	}
-
-	public void actualizarTiempoConectado() {
-		this.tiempoConectadoLabel.setText("Conectado desde: "+String.valueOf(this.conectadoDesde));
 	}
 
 	public void updateJLabel() {

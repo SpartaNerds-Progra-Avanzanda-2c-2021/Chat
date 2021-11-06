@@ -2,10 +2,11 @@ package Cliente.Manejadores;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import App.Sala;
+
 import Graficos.JFramePrincipal;
 
 import Utils.Peticion;
+import app.Sala;
 
 public class ManejadorDeNuevoUsuarioCliente extends ManejadorDelCliente<ArrayList<Sala>> {
 

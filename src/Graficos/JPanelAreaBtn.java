@@ -14,10 +14,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import App.Mensaje;
 import Cliente.Cliente;
 import Utils.Acciones;
 import Utils.Peticion;
+import app.Mensaje;
 
 public class JPanelAreaBtn extends JPanel {
     private JButton btnEnviarTexto;
