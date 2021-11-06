@@ -57,7 +57,8 @@ public class JDialogLogin extends JDialog {
 
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			new Cliente(Integer.parseInt(txtPuerto.getText()), txtIp.getText());
+				new Cliente(Integer.parseInt(txtPuerto.getText()), txtIp.getText());
+				dispose();
 			}
 		});
 
