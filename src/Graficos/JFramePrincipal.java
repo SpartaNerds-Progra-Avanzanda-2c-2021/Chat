@@ -15,6 +15,8 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -25,12 +27,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.WindowConstants;
 
 public class JFramePrincipal extends JFrame {
 	public JPanelSalas jPanelSalas;
 	public JPanelUsuarios jPanelUsuarios;
 	public static JPanelComunication jPanelComunication;
 	public boolean userShowed = false;
+	private JDialogLogin login;
 	
 	/**
 	 * Create the frame.
@@ -38,8 +42,22 @@ public class JFramePrincipal extends JFrame {
 	public JFramePrincipal() {
 		this.addJPanelSalas();
 		this.addJPanelChat();
-		this.iniciarPantallaPrincipal();
+		iniciarPantallaPrincipal();
+		iniciarLogin();
+		
 		jPanelSalas.setJPanelComunication(jPanelComunication);
+	}
+
+	private void iniciarLogin() {
+		login = new JDialogLogin();
+		login.setBounds(0, 0, 600, 130);
+		login.setResizable(false);
+		login.setLocationRelativeTo(null);
+		login.setTitle("Login");
+		login.setModal(true);
+		login.getContentPane().setLayout(null);
+		login.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		login.setVisible(true);
 	}
 
 	private void addJPanelChat() {
