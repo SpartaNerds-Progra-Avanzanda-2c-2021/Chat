@@ -57,11 +57,11 @@ public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<St
 				ArrayList<Mensaje> mensajes = new ArrayList<Mensaje>();
 				
 				for (Mensaje mensaje : salaBuscada.getMensajes()) {
+					if(!mensaje.privado) {
+						mensajes.add(mensaje);
+						continue;
+					}
 					for (Usuario destinatario : mensaje.destinatarios) {
-						if(!mensaje.privado) {
-							mensajes.add(mensaje);
-							continue;
-						}
 						if(destinatario.getId() == cliente.id) {
 							mensajes.add(mensaje);
 						}
