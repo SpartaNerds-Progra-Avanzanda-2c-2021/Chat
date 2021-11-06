@@ -31,7 +31,7 @@ import utils.Peticion;
 
 public class JPanelComunication extends JPanel{
 	private JPanelChatBox jPanelChatBox;
-	public JPanelMensajeBox jPanelMensajeBox; //cambiar a NO static
+	public JPanelMensajeBox jPanelMensajeBox;
 	private JLabel jLabelNombreSala;
 	
 	public JPanelComunication() {
@@ -45,6 +45,8 @@ public class JPanelComunication extends JPanel{
 
 	private void addJLabelNombreSala() {
 		jLabelNombreSala = new JLabel();
+		jLabelNombreSala.setFont(new Font("BOLD", Font.PLAIN, 22));
+		jLabelNombreSala.setForeground(Color.white);
 		jLabelNombreSala.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				jLabelNombreSalaClicked((JLabel)e.getComponent());

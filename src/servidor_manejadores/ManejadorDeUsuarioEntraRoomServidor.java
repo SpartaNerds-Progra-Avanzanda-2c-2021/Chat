@@ -49,6 +49,7 @@ public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<St
 		//deberia enviarselo solamente a los clientes dentro de la sala
 		for (ServerClient cliente : clientes) {
 			for (Conexion conexionesDeLaSala : salaBuscada.getConexiones()) {
+				
 				if(conexionesDeLaSala.getUsuario().getId() != cliente.id) {
 					continue;
 				}
@@ -61,7 +62,7 @@ public class ManejadorDeUsuarioEntraRoomServidor extends ManejadorDelServidor<St
 							mensajes.add(mensaje);
 							continue;
 						}
-						if(destinatario.getId() == cliente.id && mensaje.privado) {
+						if(destinatario.getId() == cliente.id) {
 							mensajes.add(mensaje);
 						}
 					}

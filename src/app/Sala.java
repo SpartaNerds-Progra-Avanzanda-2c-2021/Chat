@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Sala implements Serializable {
 	private String nombre;
-	private ArrayList<Conexion> conexiones;
+	public ArrayList<Conexion> conexiones;
 	private ArrayList<Mensaje> mensajes;
 
 	public Sala(String nombre) {

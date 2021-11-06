@@ -27,7 +27,7 @@ public class JPanelMensajeBox extends JPanel {
 		jTextAreaMensajes.setLineWrap(true);
 		jTextAreaMensajes.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		jScrollPane = new JScrollPane(jTextAreaMensajes);
-		jScrollPane.setPreferredSize(new Dimension((Constantes.chatMinWidth - Constantes.salaWidth) * 8 / 10,
+		jScrollPane.setPreferredSize(new Dimension((Constantes.chatMinWidth - Constantes.salaWidth)-15,
 				Constantes.chatMinHeight * 5 / 9));
 		this.add(jScrollPane);
 	}

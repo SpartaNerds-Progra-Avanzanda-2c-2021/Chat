@@ -31,24 +31,34 @@ public class ManejadorDeMensajeDeUsuarioEnSalaDelServidor extends ManejadorDelSe
 		
 		salaBuscada.addMensaje(mensaje);
 
+		
+		
+
+		
 		//Enviar esto solo a los usuarios dentro de la salaBuscada
 		for (ServerClient serverClient : clientes) {
 			for (Conexion conexionesDeLaSala : salaBuscada.getConexiones()) {
 				if(conexionesDeLaSala.getUsuario().getId() != serverClient.id) {
 					continue;
 				}
-				if(!mensaje.privado) {
-					Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_SEND_ROOM_SMG, salaBuscada);
-					new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);
-					continue;
-				}
 				
-				for (Usuario usuario: mensaje.destinatarios) {
-					if(usuario.getId() == conexionesDeLaSala.getUsuario().getId()) {
-						Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_SEND_ROOM_SMG, salaBuscada);
-						new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);
+				Sala respuestaAlCLiente = new Sala(salaBuscada.getNombre());
+				respuestaAlCLiente.conexiones = respuestaAlCLiente.getConexiones(); 
+				
+				for (Mensaje m : salaBuscada.getMensajes()) {
+					if(!m.privado) {
+						respuestaAlCLiente.addMensaje(m);
+						continue;
+					}
+					for (Usuario destinatario : m.destinatarios) {
+						if(destinatario.getId() == serverClient.id) {
+							respuestaAlCLiente.addMensaje(m);
+						}
 					}
 				}
+				
+				Peticion<Sala> serverMessage = new Peticion<Sala>(Acciones.USER_SEND_ROOM_SMG, respuestaAlCLiente);
+				new ObjectOutputStream(serverClient.cliente.getOutputStream()).writeObject(serverMessage);				
 			}		
 		}
 		

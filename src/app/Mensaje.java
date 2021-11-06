@@ -32,7 +32,12 @@ public class Mensaje implements Serializable{
 
 	@Override
 	public String toString() {
-		return propietario + "Se envio a las: " + createdAt + " " + info + "]\n";
+		if(privado) {
+			return info +":"+ propietario + ":@" +" \n" 
+					+ "Fecha: " + createdAt+"\n" + "\n" ;
+		}
+		return info +":"+ propietario +" \n" 
+		+ "Fecha: " + createdAt+ "\n" + "\n" ;
 	}
 	
 	public void addDestinatario(Usuario destinatario) {
