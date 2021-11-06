@@ -28,11 +28,15 @@ import GraficosViejos.VentanaABMCliente;
 public class JPanelComunication extends JPanel{
 	private static JPanelChatBox jPanelChatBox;
 	private static JPanelMensajeBox jPanelMensajeBox; //cambiar a NO static
+	private static JLabel jLabel;
 
 	public JPanelComunication() {
 		super();
+		jLabel = new JLabel();
+		jLabel.setBounds( (Constantes.chatMinWidth-Constantes.salaWidth)*8/10, 0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.salaHeight);
 		addChatBox();
 		addMensajesBox();
+		add(jLabel);
 	}
 
 	private void addChatBox() {
@@ -43,12 +47,16 @@ public class JPanelComunication extends JPanel{
 	}
 	public void addMensajesBox() {
 		jPanelMensajeBox = new JPanelMensajeBox();
-		jPanelMensajeBox.setBounds(0,0,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight*3/5);
+		jPanelMensajeBox.setBounds(0,Constantes.salaHeight,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight*3/5);
 		jPanelMensajeBox.setBackground(Constantes.jPanelMessagesColor);
 		this.add(jPanelMensajeBox);
 	}
 	
 	public static void addPanelMensaje(Mensaje info){
 		jPanelMensajeBox.addMensaje(info);
+	}
+	
+	public void setNombreSala(String nombre) {
+		jLabel.setText(nombre);
 	}
 }

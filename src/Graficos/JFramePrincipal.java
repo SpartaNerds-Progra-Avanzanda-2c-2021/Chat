@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import App.Lobby;
+import Utils.SalaCallback;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -48,6 +49,7 @@ public class JFramePrincipal extends JFrame {
 		jPanelComunication.setLayout(null);
 		jPanelComunication.setBackground(Constantes.jPanelMessagesColor);
 		getContentPane().add(jPanelComunication);
+		jPanelComunication.setVisible(false);
 	}
 	
 	private void addJPanelSalas() {
@@ -55,6 +57,13 @@ public class JFramePrincipal extends JFrame {
 		jPanelSalasYChats.setBounds(0, 0, Constantes.salaWidth, this.getHeight());
 		jPanelSalasYChats.setLayout(null);
 		jPanelSalasYChats.setBackground(Constantes.jPanelSalasYChatsColor);
+		jPanelSalasYChats.setSalaCallback(new SalaCallback() {
+			@Override
+			public void onClickSala(String nombreSala) {
+				jPanelComunication.setVisible(true);
+				jPanelComunication.setNombreSala(nombreSala);
+			}			
+		});
 		getContentPane().add(jPanelSalasYChats);
 	}
 

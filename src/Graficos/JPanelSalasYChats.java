@@ -28,10 +28,12 @@ import Cliente.Cliente;
 import GraficosViejos.VentanaABMCliente;
 import Utils.Acciones;
 import Utils.Peticion;
+import Utils.SalaCallback;
 
 public class JPanelSalasYChats extends JPanel{
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
 	private JPanelSalasYChatTitulo jPanelSalasYChatTitulo;
+	private SalaCallback salaCallback;
 	
 	public JPanelSalasYChats() {
 		super();
@@ -40,6 +42,10 @@ public class JPanelSalasYChats extends JPanel{
 	
 	public ArrayList<JPanelSala> getSalas(){
 		return this.salas;
+	}
+	
+	public void setSalaCallback(SalaCallback salaCallback) {
+		this.salaCallback = salaCallback;
 	}
 	
 	private void addTituloAndAddButton() {
@@ -68,6 +74,9 @@ public class JPanelSalasYChats extends JPanel{
 
 			public void mouseClicked(MouseEvent e) {
 				showUsers();
+				if (salaCallback != null && panel.isConectado()) {
+					salaCallback.onClickSala(nombre);
+				}
 			}
 		});
 		

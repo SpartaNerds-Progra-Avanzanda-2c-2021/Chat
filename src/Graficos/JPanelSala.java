@@ -115,4 +115,8 @@ public class JPanelSala extends JPanel{
 		this.salirButton.setText(this.conectado?"Salir":"Entrar");
 		updateJLabel();
 	}
+
+	public boolean isConectado() {
+		return conectado;
+	}
 }
