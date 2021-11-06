@@ -26,6 +26,7 @@ public class ManejadorDeUsuarioSaleRoomCliente extends ManejadorDelCliente<Sala>
 			if (sala.getNombre().equals(panelSala.getNombre())) {
 				panelSala.actualizarCantConexiones(sala.getConexiones().size());
 				panelSala.updateJLabel();
+				Cliente.salasPosibles.remove(sala.getNombre());
 			}
 		}
 	}

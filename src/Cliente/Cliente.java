@@ -5,6 +5,10 @@ import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+
 import App.Mensaje;
 import Graficos.JFramePrincipal;
 import Servidor.Constantes;
@@ -15,6 +19,8 @@ public class Cliente {
 	public static Socket cliente;
 	public static Number clienteId;
 	public static JFramePrincipal jFramePrincipal;
+	public static String salaActual;
+	public static Map<String, ArrayList<Mensaje>> salasPosibles = new TreeMap<String, ArrayList<Mensaje>>();
 	
 	public Cliente(int puerto, String ip) {
 		try {

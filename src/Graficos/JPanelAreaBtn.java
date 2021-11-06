@@ -32,6 +32,7 @@ public class JPanelAreaBtn extends JPanel {
 				Mensaje msj = new Mensaje(0, 0L, JPanelChatBox.jAreaTexto.getText());
 				
 				JPanelComunication.addPanelMensaje(msj); // full sacar static
+				Cliente.salasPosibles.get(Cliente.salaActual).add(msj);
 //				Peticion<String> serverMessage = new Peticion<String>(Acciones.USER_SEND_ROOM_SMG,
 //						JPanelChatBox.jAreaTexto.getText());
 //				try {

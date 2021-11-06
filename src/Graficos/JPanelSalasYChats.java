@@ -1,6 +1,5 @@
 package Graficos;
 
-
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
@@ -29,29 +29,29 @@ import GraficosViejos.VentanaABMCliente;
 import Utils.Acciones;
 import Utils.Peticion;
 
-public class JPanelSalasYChats extends JPanel{
+public class JPanelSalasYChats extends JPanel {
 	private ArrayList<JPanelSala> salas = new ArrayList<JPanelSala>();
 	private JPanelSalasYChatTitulo jPanelSalasYChatTitulo;
-	
+
 	public JPanelSalasYChats() {
 		super();
 		addTituloAndAddButton();
 	}
-	
-	public ArrayList<JPanelSala> getSalas(){
+
+	public ArrayList<JPanelSala> getSalas() {
 		return this.salas;
 	}
-	
+
 	private void addTituloAndAddButton() {
 		jPanelSalasYChatTitulo = new JPanelSalasYChatTitulo();
-		jPanelSalasYChatTitulo.setBounds(0,0,Constantes.salaWidth,Constantes.salaHeight);
+		jPanelSalasYChatTitulo.setBounds(0, 0, Constantes.salaWidth, Constantes.salaHeight);
 		jPanelSalasYChatTitulo.setBackground(Constantes.salaHoverColor);
 		jPanelSalasYChatTitulo.setLayout(null);
 		jPanelSalasYChatTitulo.setBackground(Constantes.jPanelSalasYChatTituloColor);
 		this.add(jPanelSalasYChatTitulo);
 	}
 
-	public void addJPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos ) {
+	public void addJPanelSala(String nombre, int cantConexiones, int cantMensajesNuevos) {
 		JPanelSala panel = new JPanelSala(nombre, cantConexiones, cantMensajesNuevos);
 		panel.setLayout(null);
 		panel.setBounds(0, Constantes.salaHeight * (salas.size() + 1), Constantes.salaWidth, Constantes.salaHeight);
@@ -68,15 +68,19 @@ public class JPanelSalasYChats extends JPanel{
 
 			public void mouseClicked(MouseEvent e) {
 				showUsers();
+				if (Cliente.salasPosibles.containsKey(nombre)) {
+					Cliente.salaActual = nombre;
+					JPanelMensajeBox.setearMensaje(Cliente.salasPosibles.get(Cliente.salaActual));
+				}
 			}
 		});
-		
+
 		salas.add(panel);
 		this.add(panel);
 		this.updateUI();
 	}
-	
-	private void showUsers(){
-		
+
+	private void showUsers() {
+
 	}
 }
