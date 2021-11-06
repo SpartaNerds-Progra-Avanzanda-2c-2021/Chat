@@ -3,6 +3,7 @@ package graficos;
 import java.awt.Color;
 
 public class Constantes {
+	public static int ChatBoxHeight = 300;
 	public static int chatMinWidth = 600;
 	public static int chatMinHeight = 600;
 	public static int salaWidth = 220;

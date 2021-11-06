@@ -47,6 +47,7 @@ public class JPanelComunication extends JPanel{
 		jLabelNombreSala = new JLabel();
 		jLabelNombreSala.setFont(new Font("BOLD", Font.PLAIN, 22));
 		jLabelNombreSala.setForeground(Color.white);
+		jLabelNombreSala.setLayout(null);
 		jLabelNombreSala.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				jLabelNombreSalaClicked((JLabel)e.getComponent());
@@ -74,7 +75,9 @@ public class JPanelComunication extends JPanel{
 	}
 	public void addMensajesBox() {
 		jPanelMensajeBox = new JPanelMensajeBox();
-		jPanelMensajeBox.setBounds(0,Constantes.salaHeight,Constantes.chatMinWidth-Constantes.salaWidth,Constantes.chatMinHeight*3/5);
+		jPanelMensajeBox.setBounds(0,Constantes.salaHeight,Constantes.chatMinWidth-Constantes.salaWidth,
+				Constantes.chatMinHeight-Constantes.ChatBoxHeight);
+		jPanelMensajeBox.setLayout(null);
 		jPanelMensajeBox.setBackground(Constantes.jPanelMessagesColor);
 		this.add(jPanelMensajeBox);
 	}

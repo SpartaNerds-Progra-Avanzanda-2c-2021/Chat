@@ -33,11 +33,11 @@ public class Mensaje implements Serializable{
 	@Override
 	public String toString() {
 		if(privado) {
-			return info +":"+ propietario + ":@" +" \n" 
-					+ "Fecha: " + createdAt+"\n" + "\n" ;
+			return "\t"+ info +":"+ propietario + ":@" +" \n" 
+					+ "\t"+ "Fecha: " + createdAt+"\n" + " \n" ;
 		}
-		return info +":"+ propietario +" \n" 
-		+ "Fecha: " + createdAt+ "\n" + "\n" ;
+		return "\t"+ info +":"+ propietario +" \n" 
+		+ "\t"+ "Fecha: " + createdAt+ "\n" + " \n" ;
 	}
 	
 	public void addDestinatario(Usuario destinatario) {

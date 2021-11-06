@@ -49,9 +49,9 @@ public class JFramePrincipal extends JFrame {
 	}
 
 	private void addJPanelChat() {
-		int widthIfIsUserJpanelShowed = userShowed?Constantes.usersWidth:0;
 		jPanelComunication = new JPanelComunication();
-		jPanelComunication.setBounds(Constantes.salaWidth, 0, Constantes.chatMinWidth-Constantes.salaWidth-widthIfIsUserJpanelShowed, this.getHeight());
+		jPanelComunication.setBounds(Constantes.salaWidth, 0,
+				Constantes.chatMinWidth-Constantes.salaWidth, this.getHeight());
 		jPanelComunication.setLayout(null);
 		jPanelComunication.setBackground(Constantes.jPanelMessagesColor);
 		getContentPane().add(jPanelComunication);
@@ -69,7 +69,7 @@ public class JFramePrincipal extends JFrame {
 			userShowed = true;
 		}else {
 			getContentPane().remove(jPanelUsuarios);
-			this.setSize(new Dimension(Constantes.chatMinWidth,this.getHeight()));
+			this.setSize(new Dimension(Constantes.chatMinWidth+17,this.getHeight()));
 			userShowed = false;
 		}
 	}
@@ -109,7 +109,7 @@ public class JFramePrincipal extends JFrame {
 		getContentPane().setLayout(null);
 
 		this.setResizable(true);
-		this.setBounds(0,0, Constantes.chatMinWidth, Constantes.chatMinHeight);
+		this.setBounds(0,0, Constantes.chatMinWidth+17, Constantes.chatMinHeight);
 		this.setMinimumSize(new Dimension(Constantes.chatMinWidth, Constantes.chatMinHeight));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -123,10 +123,8 @@ public class JFramePrincipal extends JFrame {
 	}
 	
 	private void pantallaPrincipalResized() {
-		int widthIfIsUserJpanelShowed = userShowed?Constantes.usersWidth:0;
-		
 		jPanelSalas.setSize((int)jPanelSalas.getSize().getWidth(), this.getHeight());
-		jPanelComunication.setSize(this.getWidth()-Constantes.salaWidth-widthIfIsUserJpanelShowed, this.getHeight());
+		jPanelComunication.setSize(Constantes.chatMinWidth-Constantes.salaWidth, this.getHeight());
 		if(userShowed) {
 			jPanelUsuarios.setBounds(this.getWidth()-Constantes.usersWidth, 0, Constantes.usersWidth, this.getHeight());	
 		}
