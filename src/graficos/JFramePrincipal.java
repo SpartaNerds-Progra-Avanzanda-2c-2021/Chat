@@ -42,9 +42,7 @@ public class JFramePrincipal extends JFrame {
 		this.addJPanelSalas();
 		this.addJPanelChat();
 		this.iniciarPantallaPrincipal();
-		
-		iniciarLogin();
-		
+
 		jPanelSalas.setJPanelComunication(jPanelComunication);
 	}
 
@@ -91,18 +89,6 @@ public class JFramePrincipal extends JFrame {
 		jPanelSalas.setLayout(null);
 		jPanelSalas.setBackground(Constantes.jPanelSalasYChatsColor);
 		getContentPane().add(jPanelSalas);
-	}
-
-	private void iniciarLogin() {
-		login = new JDialogLogin();
-		login.setBounds(0, 0, 400, 130);
-		login.setResizable(false);
-		login.setLocationRelativeTo(null);
-		login.setTitle("Login");
-		login.setModal(true);
-		login.getContentPane().setLayout(null);
-		login.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		login.setVisible(true);
 	}
 	
 	private void iniciarPantallaPrincipal() {
